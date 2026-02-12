@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>ASI Southwest 2026 Spring Convention Schedule</title>
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap");
+
+			:root {
+				color-scheme: light;
+				--bg: #f6f8fb;
+				--surface: #ffffff;
+				--ink: #1f2937;
+				--muted: #6b7280;
+				--brand: #2e7d6f;
+				--brand-2: #6cc4a1;
+				--accent: #f7b267;
+				--ring: rgba(46, 125, 111, 0.25);
+				--shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+				--radius: 22px;
+				--glass: rgba(255, 255, 255, 0.22);
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				font-family: "Manrope", "Segoe UI", system-ui, -apple-system, sans-serif;
+				background: radial-gradient(circle at top, #ffffff, #f0f5f4 40%, #eef2f7 70%);
+				color: var(--ink);
+				letter-spacing: 0.01em;
+			}
+
+			header {
+				background: url("ASISW-2026-hero.png") center/cover;
+				color: #fff;
+				padding: 80px 24px 120px;
+				position: relative;
+				overflow: hidden;
+				background-repeat: no-repeat;
+				background-position: center 0px;
+				will-change: background-position;
+				border-bottom-left-radius: 42px;
+				border-bottom-right-radius: 42px;
+			}
+
+			header::before {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(120deg, rgba(23, 74, 66, 0.35), rgba(62, 150, 126, 0.25));
+				pointer-events: none;
+			}
+
+			header::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background:
+					url("https://www.transparenttextures.com/patterns/arches.png"),
+					radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 60%);
+				display: none;
+				pointer-events: none;
+			}
+
+			.container {
+				max-width: 1100px;
+				margin: 0 auto;
+			}
+
+			.hero {
+				position: relative;
+				z-index: 1;
+				display: flex;
+				flex-direction: column;
+				gap: 14px;
+				min-height: 420px;
+			}
+
+			.logo-row {
+				display: flex;
+				align-items: center;
+				gap: 16px;
+			}
+
+			.logo-row img {
+				height: 64px;
+				width: auto;
+				filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
+			}
+
+			.hero h1 {
+				font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+				margin: 0;
+				font-weight: 600;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+			}
+
+			.hero p {
+				font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+				max-width: 720px;
+				margin: 0;
+				font-family: "Playfair Display", "Manrope", serif;
+				font-weight: 700;
+			}
+
+			.hero-meta {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 16px 28px;
+				font-size: 0.95rem;
+				font-weight: 500;
+			}
+
+			.hero-meta span {
+				background: var(--glass);
+				padding: 8px 14px;
+				border-radius: 999px;
+				backdrop-filter: blur(6px);
+			}
+
+			.hero-meta a {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				background: var(--glass);
+				padding: 8px 14px;
+				border-radius: 999px;
+				backdrop-filter: blur(6px);
+				color: #fff;
+				text-decoration: none;
+				border: 1px solid rgba(255, 255, 255, 0.22);
+				transition: background 0.2s ease, transform 0.2s ease;
+			}
+
+			.hero-meta a:hover {
+				background: rgba(255, 255, 255, 0.32);
+				transform: translateY(-1px);
+			}
+
+			.hero-meta .pin {
+				font-size: 1rem;
+			}
+
+			.countdown {
+				display: grid;
+				gap: 10px;
+				margin-top: 6px;
+			}
+
+			.countdown-label {
+				font-size: 0.9rem;
+				letter-spacing: 0.18em;
+				text-transform: uppercase;
+				font-weight: 600;
+				color: rgba(255, 255, 255, 0.78);
+			}
+
+			.countdown-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
+				gap: 12px;
+				max-width: 520px;
+			}
+
+			.countdown-card {
+				background: rgba(255, 255, 255, 0.16);
+				border: 1px solid rgba(255, 255, 255, 0.28);
+				border-radius: 16px;
+				padding: 14px 16px;
+				backdrop-filter: blur(10px);
+				text-align: center;
+				box-shadow: 0 16px 32px rgba(15, 23, 42, 0.2);
+			}
+
+			.countdown-value {
+				font-size: clamp(1.4rem, 3.2vw, 2rem);
+				font-weight: 700;
+				letter-spacing: 0.02em;
+			}
+
+			.countdown-unit {
+				font-size: 0.75rem;
+				letter-spacing: 0.16em;
+				text-transform: uppercase;
+				color: rgba(255, 255, 255, 0.7);
+				margin-top: 4px;
+				display: block;
+			}
+
+			.theme-date {
+				font-size: 1.1rem;
+				letter-spacing: 0.18em;
+				text-transform: uppercase;
+				font-weight: 600;
+				color: rgba(255, 255, 255, 0.8);
+				margin-top: -6px;
+				margin-bottom: 20px;
+			}
+
+			.hero-bottom {
+				margin-top: auto;
+				display: grid;
+				gap: 16px;
+			}
+			.theme-pill {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				background: rgba(255, 255, 255, 0.18);
+				border: 1px solid rgba(255, 255, 255, 0.3);
+				padding: 16px 28px;
+				border-radius: 999px;
+				font-size: clamp(1.6rem, 3.6vw, 2.7rem);
+				letter-spacing: 0.01em;
+				text-transform: lowercase;
+				font-weight: 700;
+				margin: 16px 0 32px;
+				box-shadow: 0 18px 36px rgba(15, 23, 42, 0.22);
+				backdrop-filter: blur(10px);
+			}
+
+			.theme-pill span {
+				font-weight: 600;
+				letter-spacing: 0.02em;
+				text-transform: lowercase;
+				font-size: inherit;
+				font-family: "Manrope", "Segoe UI", system-ui, -apple-system, sans-serif;
+				line-height: 1.2;
+			}
+
+			main {
+				margin-top: 0;
+				padding: 32px 24px 80px;
+			}
+
+			.schedule-title {
+				margin: 0 0 14px;
+				font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+				font-weight: 700;
+				color: var(--ink);
+				letter-spacing: 0.01em;
+			}
+
+			.nav {
+				display: flex;
+				gap: 12px;
+				flex-wrap: wrap;
+				margin-bottom: 28px;
+				position: sticky;
+				top: 0;
+				background: rgba(246, 248, 251, 0.92);
+				backdrop-filter: blur(12px);
+				padding: 12px;
+				border-radius: 16px;
+				border: 1px solid rgba(148, 163, 184, 0.25);
+				box-shadow: 0 18px 38px rgba(15, 23, 42, 0.08);
+				z-index: 10;
+			}
+
+			.nav button {
+				border: 1px solid rgba(148, 163, 184, 0.22);
+				background: rgba(255, 255, 255, 0.92);
+				padding: 10px 18px;
+				border-radius: 999px;
+				font-weight: 600;
+				color: var(--ink);
+				cursor: pointer;
+				box-shadow: none;
+				transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+			}
+
+			.nav button.active,
+			.nav button:hover {
+				border-color: transparent;
+				color: #fff;
+				background: linear-gradient(120deg, var(--brand), var(--brand-2));
+				box-shadow: 0 12px 26px rgba(46, 125, 111, 0.35);
+				transform: translateY(-1px);
+			}
+
+			.day-section {
+				margin-bottom: 42px;
+			}
+
+			.day-header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 12px;
+				margin-bottom: 20px;
+			}
+
+			.day-header h2 {
+				margin: 0;
+				font-size: 1.6rem;
+			}
+
+			.day-header span {
+				color: var(--muted);
+				font-weight: 600;
+			}
+
+			.schedule-grid {
+				display: grid;
+				gap: 16px;
+				align-items: start;
+			}
+
+			.event-card {
+				background: var(--surface);
+				border-radius: var(--radius);
+				padding: 20px 22px;
+				box-shadow: var(--shadow);
+				display: grid;
+				grid-template-columns: minmax(0, 1fr);
+				gap: 8px;
+				border: 1px solid rgba(226, 232, 240, 0.7);
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
+			}
+
+			.event-card:hover {
+				transform: translateY(-4px);
+				box-shadow: 0 22px 48px rgba(15, 23, 42, 0.12);
+			}
+
+			.event-top {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: space-between;
+				gap: 8px;
+				grid-column: 1;
+				grid-row: 1;
+				justify-self: stretch;
+				padding-bottom: 10px;
+				margin-bottom: 6px;
+				border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+			}
+
+			.event-top-right {
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+				gap: 10px;
+				flex-wrap: wrap;
+			}
+
+			.top-location {
+				color: var(--muted);
+				font-size: 0.9rem;
+				font-weight: 600;
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+			}
+
+			.top-location strong {
+				color: var(--ink);
+				font-weight: 600;
+			}
+
+			.location-icon {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 14px;
+				height: 14px;
+				color: var(--brand);
+				flex-shrink: 0;
+			}
+
+			.location-icon svg {
+				width: 100%;
+				height: 100%;
+				stroke: currentColor;
+				stroke-width: 2;
+				fill: none;
+				stroke-linecap: round;
+				stroke-linejoin: round;
+			}
+
+			.sr-only {
+				position: absolute;
+				width: 1px;
+				height: 1px;
+				padding: 0;
+				margin: -1px;
+				overflow: hidden;
+				clip: rect(0, 0, 0, 0);
+				white-space: nowrap;
+				border: 0;
+			}
+
+			.time {
+				font-weight: 700;
+				color: var(--brand);
+				font-size: 0.95rem;
+			}
+
+			.tag {
+				background: rgba(46, 125, 111, 0.14);
+				color: var(--brand);
+				border: 1px solid rgba(46, 125, 111, 0.18);
+				padding: 4px 10px;
+				border-radius: 999px;
+				font-size: 0.75rem;
+				font-weight: 600;
+				display: inline-flex;
+				align-items: center;
+				gap: 4px;
+			}
+
+			.tag svg {
+				display: none;
+			}
+
+			.event-card h3 {
+				margin: 0;
+				font-size: 1.1rem;
+				grid-column: 1;
+				grid-row: 2;
+			}
+
+			.event-card p {
+				margin: 0;
+				color: var(--muted);
+				line-height: 1.5;
+				font-size: 0.95rem;
+				grid-column: 1 / -1;
+			}
+
+			.event-list {
+				margin: 0;
+				padding-left: 0;
+				color: var(--muted);
+				display: grid;
+				gap: 6px;
+				line-height: 1.5;
+				font-size: 0.95rem;
+				grid-column: 1 / -1;
+				list-style: none;
+			}
+
+			.event-list li {
+				padding: 10px 0;
+				border-top: 1px solid rgba(148, 163, 184, 0.12);
+				display: grid;
+				grid-template-columns: minmax(140px, max-content) 1fr;
+				column-gap: 12px;
+				align-items: start;
+			}
+
+			.event-list li:first-child {
+				border-top: none;
+				padding-top: 0;
+			}
+
+			.event-list strong {
+				color: var(--ink);
+				white-space: nowrap;
+				grid-column: 1;
+			}
+
+			.event-list .item-value {
+				grid-column: 2;
+			}
+
+			.event-list .detail-line {
+				display: block;
+				margin-top: 4px;
+			}
+
+			.icon {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 18px;
+				height: 18px;
+				flex-shrink: 0;
+				color: var(--brand);
+			}
+
+			.icon svg {
+				width: 100%;
+				height: 100%;
+				stroke: currentColor;
+				stroke-width: 2;
+				fill: none;
+				stroke-linecap: round;
+				stroke-linejoin: round;
+			}
+
+			.time-with-icon {
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				font-weight: 700;
+				color: var(--brand);
+				font-size: 0.95rem;
+			}
+
+			.meta-row {
+				display: grid;
+				gap: 6px;
+				font-size: 0.95rem;
+				color: var(--muted);
+				grid-column: 1 / -1;
+			}
+
+			.meta-row strong {
+				color: var(--ink);
+			}
+
+			.note {
+				background: linear-gradient(120deg, rgba(46, 125, 111, 0.12), rgba(108, 196, 161, 0.12));
+				border-left: 4px solid var(--brand);
+				padding: 16px 18px;
+				border-radius: 14px;
+				color: var(--muted);
+				margin-bottom: 24px;
+			}
+
+			footer {
+				text-align: center;
+				color: var(--muted);
+				padding-top: 20px;
+			}
+
+			@media (min-width: 900px) {
+				.schedule-grid {
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+				}
+
+				.theme-pill span {
+					white-space: nowrap;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="container hero">
+				<div class="logo-row">
+					<img src="ASISW-Logo.svg" alt="ASI Southwest logo" />
+				</div>
+				<h1>ASI Southwest 2026 Spring Convention</h1>
+				<div class="theme-pill">
+					<span>renewed &amp; restored: living whole in a broken world</span>
+				</div>
+				<div class="theme-date">April 9–12, 2026 • Crowley, TX</div>
+				<div class="hero-bottom">
+					<div class="countdown" aria-live="polite">
+						<span class="countdown-label">Countdown to Opening</span>
+						<div class="countdown-grid" data-countdown>
+							<div class="countdown-card">
+								<div class="countdown-value" data-days>0</div>
+								<span class="countdown-unit">Days</span>
+							</div>
+							<div class="countdown-card">
+								<div class="countdown-value" data-hours>0</div>
+								<span class="countdown-unit">Hours</span>
+							</div>
+							<div class="countdown-card">
+								<div class="countdown-value" data-minutes>0</div>
+								<span class="countdown-unit">Minutes</span>
+							</div>
+							<div class="countdown-card">
+								<div class="countdown-value" data-seconds>0</div>
+								<span class="countdown-unit">Seconds</span>
+							</div>
+						</div>
+					</div>
+					<div class="hero-meta">
+						<span>Stage Manager: Lorena Marin</span>
+						<a class="map-link" data-map-link data-address="3200 FM1187, Crowley, Texas 76036" href="#">
+							Location: Crowley Seventh-day Adventist Church Campus | 3200 FM1187, Crowley, Texas 76036
+						</a>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<main>
+			<div class="container">
+				<h2 class="schedule-title">Spring Convention Schedule</h2>
+
+				<nav class="nav" aria-label="Schedule days">
+					<button class="active" data-day="thursday">Thursday · April 9</button>
+					<button data-day="friday">Friday · April 10</button>
+					<button data-day="sabbath">Sabbath · April 11</button>
+					<button data-day="sunday">Sunday · April 12</button>
+				</nav>
+
+				<section class="day-section" id="thursday" data-day-section>
+					<div class="day-header">
+						<h2>Thursday, April 9, 2026</h2>
+						<span>Arrival &amp; Opening Night</span>
+					</div>
+					<div class="schedule-grid">
+						<article class="event-card">
+							<div class="event-top">
+							<span class="time-with-icon">
+								<span class="icon">
+									<svg viewBox="0 0 24 24">
+										<circle cx="12" cy="12" r="10"></circle>
+										<polyline points="12 6 12 12 16 14"></polyline>
+									</svg>
+								</span>
+								3:00–7:00 p.m.
+							</span>
+							<div class="event-top-right">
+								<span class="tag">Concurrent</span>
+								<span class="top-location">
+									<span class="location-icon" aria-hidden="true">
+										<svg viewBox="0 0 24 24">
+											<path d="M12 21s-6-6.25-6-11a6 6 0 1 1 12 0c0 4.75-6 11-6 11z"></path>
+											<circle cx="12" cy="10" r="2.5"></circle>
+										</svg>
+									</span>
+									<span class="sr-only">Location</span>
+									Main Lobby • Exhibit Hall
+								</span>
+							</div>
+							</div>
+							<h3>Concurrent: Registration &amp; Exhibitor Set-up</h3>
+							<ul class="event-list">
+								<li>
+									<strong>Registration opens:</strong> Check-in, receive badges, and pick up your convention materials.
+								</li>
+								<li>
+									<strong>Exhibitor set-up:</strong> Exhibitors prepare booths and displays.
+								</li>
+							</ul>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+							<span class="time-with-icon">
+								<span class="icon">
+									<svg viewBox="0 0 24 24">
+										<circle cx="12" cy="12" r="10"></circle>
+										<polyline points="12 6 12 12 16 14"></polyline>
+									</svg>
+								</span>
+								5:30 p.m.
+							</span>
+							<span class="tag">Dinner</span>
+							</div>
+							<h3>Dinner &amp; ASI/Crowley Prebrief</h3>
+							<p>Meal tickets required. A prebrief with ASI Southwest and Crowley leadership follows dinner.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Fellowship Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          6:30 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/>
+      <polyline points="12 7 12 12 16 14" stroke="currentColor" stroke-width="2" fill="none"/>
+    </svg>Evening Program</span>
+							</div>
+							<h3>Opening Session</h3>
+							<ul class="event-list">
+								<li><strong>Song service:</strong> Jack Stout (Turn To Jesus Ministries)</li>
+								<li><strong>Welcome and prayer:</strong> Pat Humphrey &amp; Adam Keating</li>
+								<li><strong>Members in Action:</strong> Floyd Courtney</li>
+								<li><strong>Special music:</strong> Hillsboro SDA Choir</li>
+								<li>
+									<strong>Presentation:</strong> “Nutrition vs. Prescription: The Truth About Mental Health Treatments,”
+									Dr. Neil Nedley
+								</li>
+							</ul>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Sanctuary</span>
+								<span><strong>Announcements:</strong> Victoria Okotie</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          8:30–10:00 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M13 13h-2v-2h2v2zm0-6h-2V5h2v2zm6 0h-2V5h2v2zM7 13H5v-2h2v2zm12-7h-1V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v1H9V4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v1H2v2h2v10c0 .55.45 1 1 1h14c.55 0 1-.45 1-1V8h2V6zM4 8h16v10H4V8zm9 2h-2v2h2v-2z" fill="currentColor"/>
+    </svg>Exhibits Open</span>
+							</div>
+							<h3>Exhibit Hall Opens</h3>
+							<p>Meet partner ministries, authors, and outreach teams.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Exhibit Hall</span>
+							</div>
+						</article>
+					</div>
+				</section>
+
+				<section class="day-section" id="friday" data-day-section>
+					<div class="day-header">
+						<h2>Friday, April 10, 2026</h2>
+						<span>Learning &amp; Seminars</span>
+					</div>
+					<div class="schedule-grid">
+						<article class="event-card">
+							<div class="event-top">
+							<span class="time-with-icon">
+								<span class="icon">
+									<svg viewBox="0 0 24 24">
+										<circle cx="12" cy="12" r="10"></circle>
+										<polyline points="12 6 12 12 16 14"></polyline>
+									</svg>
+								</span>
+								7:45–8:30 a.m.
+							</span>
+							<span class="tag">Breakfast</span>
+							</div>
+							<h3>Breakfast</h3>
+							<p>Start the day with fellowship and a hearty breakfast.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Fellowship Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time-with-icon">
+								<span class="icon">
+									<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+								</span>
+								8:40 a.m.
+							</span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/>
+      <polyline points="12 7 12 12 16 14" stroke="currentColor" stroke-width="2" fill="none"/>
+    </svg>Morning Program</span>
+							</div>
+							<h3>Morning Worship &amp; Music</h3>
+							<ul class="event-list">
+								<li><strong>Song service:</strong> Jack Stout &amp; Art Humphrey</li>
+								<li><strong>Welcome and prayer:</strong> Paul Ogaga</li>
+								<li><strong>Members in Action:</strong> Pat Humphrey</li>
+								<li><strong>Introduction of speakers:</strong> Jose Rosado</li>
+								<li><strong>Special music:</strong> Melashenko Family</li>
+							</ul>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Sanctuary</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          9:00 a.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" fill="currentColor"/>
+    </svg>Speaker</span>
+							</div>
+							<h3>“What’s Love Got to Do with It?”</h3>
+							<p>Don Mackintosh, Senior Pastor, Weimar University Church.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Sanctuary</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          10:00 a.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M5 13.18c0 .65.13 1.29.38 1.93L2.85 16.7c-.53-1.02-.99-2.11-1.33-3.26h.01c-.35-1.24-.52-2.54-.52-3.9 0-1.36.17-2.66.52-3.9H1.52c.34-1.15.8-2.24 1.33-3.26l2.53 1.59c-.25.64-.38 1.28-.38 1.93 0 2.13 1.26 3.96 3.06 4.77l-1.89 3.15c-.71-.41-1.33-.95-1.86-1.59z" fill="currentColor"/>
+      <path d="M12.75 7.02c.29.27.56.56.79.87l2.6-1.5c.54 1.02 1 2.11 1.33 3.26h-.01c.35 1.24.52 2.54.52 3.9 0 1.36-.17 2.66-.52 3.9h.01c-.33 1.15-.79 2.24-1.33 3.26l-2.6-1.5c-.23.31-.5.6-.79.87l1.89 3.15c.71.41 1.33.95 1.86 1.59l2.53-1.59c.25.64.38 1.28.38 1.93 0-2.13-1.26-3.96-3.06-4.77l1.89-3.15z" fill="currentColor"/>
+    </svg>Seminar 1</span>
+							</div>
+							<h3>Title TBD</h3>
+							<p>Claudio Japas, DrPH &amp; Daniel Japas, MD.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Seminar Room A</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          11:00–11:15 a.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z" fill="currentColor"/>
+    </svg>Break</span>
+							</div>
+							<h3>Refreshment Break</h3>
+							<p>Stretch, connect, and recharge.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Courtyard</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          11:15 a.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M5 13.18c0 .65.13 1.29.38 1.93L2.85 16.7c-.53-1.02-.99-2.11-1.33-3.26h.01c-.35-1.24-.52-2.54-.52-3.9 0-1.36.17-2.66.52-3.9H1.52c.34-1.15.8-2.24 1.33-3.26l2.53 1.59c-.25.64-.38 1.28-.38 1.93 0 2.13 1.26 3.96 3.06 4.77l-1.89 3.15c-.71-.41-1.33-.95-1.86-1.59z" fill="currentColor"/>
+      <path d="M12.75 7.02c.29.27.56.56.79.87l2.6-1.5c.54 1.02 1 2.11 1.33 3.26h-.01c.35 1.24.52 2.54.52 3.9 0 1.36-.17 2.66-.52 3.9h.01c-.33 1.15-.79 2.24-1.33 3.26l-2.6-1.5c-.23.31-.5.6-.79.87l1.89 3.15c.71.41 1.33.95 1.86 1.59l2.53-1.59c.25.64.38 1.28.38 1.93 0-2.13-1.26-3.96-3.06-4.77l1.89-3.15z" fill="currentColor"/>
+    </svg>Seminar 2</span>
+							</div>
+							<h3>“Nature’s Medical Cabinet: Remedies that Work”</h3>
+							<p>Sonja &amp; Dave Upham.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Seminar Room A</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          12:15–1:15 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M3 3h18v7.5c0 1.1-.9 2-2 2h-2v2h2c1.1 0 2 .9 2 2V21H3v-4.5c0-1.1.9-2 2-2h2v-2H5c-1.1 0-2-.9-2-2V3z" fill="currentColor"/>
+    </svg>Meal Tickets</span>
+							</div>
+							<h3>Lunch</h3>
+							<p>Meal tickets required.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Fellowship Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          12:00–3:00 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M13 13h-2v-2h2v2zm0-6h-2V5h2v2zm6 0h-2V5h2v2zM7 13H5v-2h2v2zm12-7h-1V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v1H9V4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v1H2v2h2v10c0 .55.45 1 1 1h14c.55 0 1-.45 1-1V8h2V6zM4 8h16v10H4V8zm9 2h-2v2h2v-2z" fill="currentColor"/>
+    </svg>Exhibits Open</span>
+							</div>
+							<h3>Exhibit Hall Open</h3>
+							<p>Explore ministry booths, resources, and networking.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Exhibit Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          1:00–1:25 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M7.5 5C5.57 5 4 6.57 4 8.5c0 2.03 1.34 3.78 3.14 4.32.47.54.83 1.15 1.04 1.82.21.65.33 1.33.33 2.04 0 .93-.16 1.83-.47 2.67.68.62 1.56 1 2.5 1s1.82-.38 2.5-1c-.31-.84-.47-1.74-.47-2.67 0-.71.12-1.38.33-2.04.22-.67.57-1.28 1.04-1.82 1.8-.54 3.14-2.29 3.14-4.32 0-1.93-1.57-3.5-3.5-3.5z" fill="currentColor"/>
+    </svg>Prayer Time</span>
+							</div>
+							<h3>Revived, Renewed, and Restored</h3>
+							<p>Prayer time led by Dave Upham, VP Evangelism, ASI Southwest.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Prayer Chapel</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          1:30–1:37 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/>
+      <polyline points="12 7 12 12 16 14" stroke="currentColor" stroke-width="2" fill="none"/>
+    </svg>Afternoon Seminars</span>
+							</div>
+							<h3>Welcome, Prayer &amp; Special Music</h3>
+							<p>Welcome and prayer by Jason Burghart. Special music by Melashenko Trio.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Sanctuary</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          1:37 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M5 13.18c0 .65.13 1.29.38 1.93L2.85 16.7c-.53-1.02-.99-2.11-1.33-3.26h.01c-.35-1.24-.52-2.54-.52-3.9 0-1.36.17-2.66.52-3.9H1.52c.34-1.15.8-2.24 1.33-3.26l2.53 1.59c-.25.64-.38 1.28-.38 1.93 0 2.13 1.26 3.96 3.06 4.77l-1.89 3.15c-.71-.41-1.33-.95-1.86-1.59z" fill="currentColor"/>
+      <path d="M12.75 7.02c.29.27.56.56.79.87l2.6-1.5c.54 1.02 1 2.11 1.33 3.26h-.01c.35 1.24.52 2.54.52 3.9 0 1.36-.17 2.66-.52 3.9h.01c-.33 1.15-.79 2.24-1.33 3.26l-2.6-1.5c-.23.31-.5.6-.79.87l1.89 3.15c.71.41 1.33.95 1.86 1.59l2.53-1.59c.25.64.38 1.28.38 1.93 0-2.13-1.26-3.96-3.06-4.77l1.89-3.15z" fill="currentColor"/>
+    </svg>Seminar 3</span>
+							</div>
+							<h3>“Healed with Healing”</h3>
+							<p>Don Mackintosh, Senior Pastor, Weimar University Church.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Seminar Room B</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          2:30 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" fill="currentColor"/>
+    </svg>Health Focus</span>
+							</div>
+							<h3>Tips for Healthy Living</h3>
+							<p>Maricela Cabrera, MPH, NBC-HWC.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Seminar Room B</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          2:45 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M5 13.18c0 .65.13 1.29.38 1.93L2.85 16.7c-.53-1.02-.99-2.11-1.33-3.26h.01c-.35-1.24-.52-2.54-.52-3.9 0-1.36.17-2.66.52-3.9H1.52c.34-1.15.8-2.24 1.33-3.26l2.53 1.59c-.25.64-.38 1.28-.38 1.93 0 2.13 1.26 3.96 3.06 4.77l-1.89 3.15c-.71-.41-1.33-.95-1.86-1.59z" fill="currentColor"/>
+      <path d="M12.75 7.02c.29.27.56.56.79.87l2.6-1.5c.54 1.02 1 2.11 1.33 3.26h-.01c.35 1.24.52 2.54.52 3.9 0 1.36-.17 2.66-.52 3.9h.01c-.33 1.15-.79 2.24-1.33 3.26l-2.6-1.5c-.23.31-.5.6-.79.87l1.89 3.15c.71.41 1.33.95 1.86 1.59l2.53-1.59c.25.64.38 1.28.38 1.93 0-2.13-1.26-3.96-3.06-4.77l1.89-3.15z" fill="currentColor"/>
+    </svg>Seminar 4</span>
+							</div>
+							<h3>“Helping Your Kids Succeed in School”</h3>
+							<p>Eric Walsh, MD/DrPH.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Seminar Room B</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          3:40 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M5 13.18c0 .65.13 1.29.38 1.93L2.85 16.7c-.53-1.02-.99-2.11-1.33-3.26h.01c-.35-1.24-.52-2.54-.52-3.9 0-1.36.17-2.66.52-3.9H1.52c.34-1.15.8-2.24 1.33-3.26l2.53 1.59c-.25.64-.38 1.28-.38 1.93 0 2.13 1.26 3.96 3.06 4.77l-1.89 3.15c-.71-.41-1.33-.95-1.86-1.59z" fill="currentColor"/>
+      <path d="M12.75 7.02c.29.27.56.56.79.87l2.6-1.5c.54 1.02 1 2.11 1.33 3.26h-.01c.35 1.24.52 2.54.52 3.9 0 1.36-.17 2.66-.52 3.9h.01c-.33 1.15-.79 2.24-1.33 3.26l-2.6-1.5c-.23.31-.5.6-.79.87l1.89 3.15c.71.41 1.33.95 1.86 1.59l2.53-1.59c.25.64.38 1.28.38 1.93 0-2.13-1.26-3.96-3.06-4.77l1.89-3.15z" fill="currentColor"/>
+    </svg>Seminar 5</span>
+							</div>
+							<h3>“Enhancing Emotional Intelligence”</h3>
+							<p>Dr. Neil Nedley, Medical Director, Nedley Health.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Seminar Room B</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          4:45–6:30 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M13 13h-2v-2h2v2zm0-6h-2V5h2v2zm6 0h-2V5h2v2zM7 13H5v-2h2v2zm12-7h-1V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v1H9V4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v1H2v2h2v10c0 .55.45 1 1 1h14c.55 0 1-.45 1-1V8h2V6zM4 8h16v10H4V8zm9 2h-2v2h2v-2z" fill="currentColor"/>
+    </svg>Exhibits Open</span>
+							</div>
+							<h3>Exhibit Hall Open</h3>
+							<p>Reconnect with exhibitors and ministry partners.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Exhibit Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          5:30–6:45 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M11 9H9V3H7v6H5V3H3v14c0 2.12 1.66 3.84 3.75 3.97V23h2.5v-2.03C15.34 20.84 17 19.12 17 17V3h-2v6h-2V3h-2v6z" fill="currentColor"/>
+    </svg>Dinner</span>
+							</div>
+							<h3>Dinner (Complimentary)</h3>
+							<p>Compliments of Child Impact International. Reservations and meal tickets required.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Fellowship Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          7:00–7:25 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M7.5 5C5.57 5 4 6.57 4 8.5c0 2.03 1.34 3.78 3.14 4.32.47.54.83 1.15 1.04 1.82.21.65.33 1.33.33 2.04 0 .93-.16 1.83-.47 2.67.68.62 1.56 1 2.5 1s1.82-.38 2.5-1c-.31-.84-.47-1.74-.47-2.67 0-.71.12-1.38.33-2.04.22-.67.57-1.28 1.04-1.82 1.8-.54 3.14-2.29 3.14-4.32 0-1.93-1.57-3.5-3.5-3.5z" fill="currentColor"/>
+    </svg>Prayer Time</span>
+							</div>
+							<h3>Revived, Renewed, and Restored</h3>
+							<p>Prayer time led by Dave Upham, VP Evangelism, ASI Southwest.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Prayer Chapel</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          7:30 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/>
+      <polyline points="12 7 12 12 16 14" stroke="currentColor" stroke-width="2" fill="none"/>
+    </svg>Evening Program</span>
+							</div>
+							<h3>The Sanctuary &amp; Health</h3>
+							<ul class="event-list">
+								<li><strong>Welcome and prayer:</strong> Nathan Powell</li>
+								<li><strong>ASI Membership Spotlight:</strong> Paul Ogaga</li>
+								<li><strong>Members in Action:</strong> Jason Burghart</li>
+								<li><strong>Special music:</strong> Jackie Walsh</li>
+								<li><strong>Speaker:</strong> Don Mackintosh</li>
+								<li><strong>Closing prayer:</strong> Don Mackintosh</li>
+								<li><strong>Announcements:</strong> Victoria Okotie</li>
+							</ul>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Sanctuary</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          8:30–9:30 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M5 13.18c0 .65.13 1.29.38 1.93L2.85 16.7c-.53-1.02-.99-2.11-1.33-3.26h.01c-.35-1.24-.52-2.54-.52-3.9 0-1.36.17-2.66.52-3.9H1.52c.34-1.15.8-2.24 1.33-3.26l2.53 1.59c-.25.64-.38 1.28-.38 1.93 0 2.13 1.26 3.96 3.06 4.77l-1.89 3.15c-.71-.41-1.33-.95-1.86-1.59z" fill="currentColor"/>
+    </svg>Non-Commercial Exhibits</span>
+							</div>
+							<h3>Non-Commercial Exhibits Open</h3>
+							<p>Showcase ministry initiatives and outreach projects.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Exhibit Hall</span>
+							</div>
+						</article>
+					</div>
+				</section>
+
+				<section class="day-section" id="sabbath" data-day-section>
+					<div class="day-header">
+						<h2>Sabbath, April 11, 2026</h2>
+						<span>Worship &amp; Celebration</span>
+					</div>
+					<div class="schedule-grid">
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          8:00 a.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M3 3h18v7.5c0 1.1-.9 2-2 2h-2v2h2c1.1 0 2 .9 2 2V21H3v-4.5c0-1.1.9-2 2-2h2v-2H5c-1.1 0-2-.9-2-2V3z" fill="currentColor"/>
+    </svg>Meal Tickets</span>
+							</div>
+							<h3>Breakfast</h3>
+							<p>Meal tickets required.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Fellowship Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          9:00 a.m.
+        </span>
+								<span class="tag">Sabbath School</span>
+							</div>
+							<h3>Sabbath School Program</h3>
+							<ul class="event-list">
+								<li><strong>Song service:</strong> Jack Stout</li>
+								<li><strong>Welcome and prayer:</strong> Estar Ogaga</li>
+								<li><strong>Special feature:</strong> “Abundant Life as an Entering Wedge” — Joy Kauffman</li>
+								<li>
+									<strong>Special music:</strong> Kristina &amp; Sofia Stojanovic, Giselle Japas, Karen Savignon
+								</li>
+								<li><strong>Members in Action:</strong> Pat Humphrey</li>
+								<li><strong>Panel:</strong> Sabbath School Panel (title TBD), moderator Don Mackintosh</li>
+								<li><strong>Special music:</strong> Jacquelyn Muse, Sofia Barnes, Enny Infante</li>
+							</ul>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Sanctuary</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          10:30 a.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z" fill="currentColor"/>
+    </svg>Break</span>
+							</div>
+							<h3>Mid-Morning Break</h3>
+							<p>Refresh and connect before worship.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Courtyard</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          10:45 a.m.
+        </span>
+								<span class="tag">Divine Worship</span>
+							</div>
+							<h3>Divine Worship Service</h3>
+							<ul class="event-list">
+								<li><strong>Introit:</strong> “The Lord Is in His Holy Temple” — Karen Savignon</li>
+								<li><strong>Invocation &amp; welcome:</strong> John Page</li>
+								<li><strong>Welcome &amp; introductions:</strong> Adam Keating &amp; Pat Humphrey</li>
+								<li><strong>Members in Action:</strong> Jose Rosado</li>
+								<li><strong>Offering appeal:</strong> TBD</li>
+								<li><strong>Scripture reading:</strong> Dave Upham &amp; Jose Luis Santa Cruz</li>
+								<li>
+									<strong>Sermon:</strong> “Christ’s Medical Missionary Healing of Body, Soul, &amp; Mind,” Dr. Neil Nedley
+								</li>
+								<li><strong>Special music:</strong> Jacqueline Muse, Sofia Barnes, Enny Infante</li>
+								<li><strong>Special music:</strong> Melashenko Trio (title TBD)</li>
+								<li><strong>Doxology:</strong> “Praise God from Whom All Blessings Flow,” No. 694</li>
+								<li><strong>Closing hymn:</strong> “We Have This Hope,” No. 214</li>
+								<li><strong>Benediction:</strong> Dr. Neil Nedley &amp; Adam Keating</li>
+							</ul>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Sanctuary</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          12:30 p.m.
+        </span>
+								<span class="tag">Complimentary</span>
+							</div>
+							<h3>Lunch</h3>
+							<p>Complimentary lunch (online pre-registration required).</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Fellowship Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          2:00–2:25 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M7.5 5C5.57 5 4 6.57 4 8.5c0 2.03 1.34 3.78 3.14 4.32.47.54.83 1.15 1.04 1.82.21.65.33 1.33.33 2.04 0 .93-.16 1.83-.47 2.67.68.62 1.56 1 2.5 1s1.82-.38 2.5-1c-.31-.84-.47-1.74-.47-2.67 0-.71.12-1.38.33-2.04.22-.67.57-1.28 1.04-1.82 1.8-.54 3.14-2.29 3.14-4.32 0-1.93-1.57-3.5-3.5-3.5z" fill="currentColor"/>
+    </svg>Prayer Time</span>
+							</div>
+							<h3>Revived, Renewed, and Restored</h3>
+							<p>Prayer time led by Dave Upham, VP Evangelism, ASI Southwest.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Prayer Chapel</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          2:30 p.m.
+        </span>
+								<span class="tag">Afternoon Program</span>
+							</div>
+							<h3>The Vital Role of Your Testimony</h3>
+							<ul class="event-list">
+								<li><strong>Congregational singing:</strong> Jose &amp; Colette Rosado</li>
+								<li><strong>Special music:</strong> Jose &amp; Colette Rosado</li>
+								<li><strong>Speaker:</strong> “The Vital Role of Your Testimony,” Don Mackintosh</li>
+								<li><strong>Testimonies:</strong> Jose Rosado</li>
+								<li><strong>Special music:</strong> Melashenko Trio</li>
+							</ul>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Sanctuary</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          4:30 p.m.
+        </span>
+								<span class="tag">Film</span>
+							</div>
+							<h3>Movie Screening: “Marked for Destruction”</h3>
+							<p>Presented by 3 AM Films.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Media Room</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          5:30 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M3 3h18v7.5c0 1.1-.9 2-2 2h-2v2h2c1.1 0 2 .9 2 2V21H3v-4.5c0-1.1.9-2 2-2h2v-2H5c-1.1 0-2-.9-2-2V3z" fill="currentColor"/>
+    </svg>Meal Tickets</span>
+							</div>
+							<h3>Dinner</h3>
+							<p>Meal tickets required.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Fellowship Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          7:00 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/>
+      <polyline points="12 7 12 12 16 14" stroke="currentColor" stroke-width="2" fill="none"/>
+    </svg>Evening Program</span>
+							</div>
+							<h3>Comprehensive Approach to Eradicate Depression &amp; Anxiety</h3>
+							<ul class="event-list">
+								<li><strong>Welcome &amp; prayer:</strong> Cesar Flores</li>
+								<li><strong>Members in Action:</strong> Lorena Marin</li>
+								<li><strong>Special music:</strong> Jackie Walsh (title TBD)</li>
+								<li><strong>Speaker:</strong> Dr. Neil Nedley</li>
+								<li><strong>Special music:</strong> Melashenko Trio (title TBD)</li>
+								<li><strong>Closing prayer &amp; announcements:</strong> Jose Rosado</li>
+							</ul>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Sanctuary</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          8:45–10:00 p.m.
+        </span>
+								<span class="tag"><svg viewBox="0 0 24 24" width="16" height="16" style="margin-right: 4px;">
+      <path d="M13 13h-2v-2h2v2zm0-6h-2V5h2v2zm6 0h-2V5h2v2zM7 13H5v-2h2v2zm12-7h-1V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v1H9V4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v1H2v2h2v10c0 .55.45 1 1 1h14c.55 0 1-.45 1-1V8h2V6zM4 8h16v10H4V8zm9 2h-2v2h2v-2z" fill="currentColor"/>
+    </svg>Exhibits Open</span>
+							</div>
+							<h3>Exhibit Hall Open</h3>
+							<p>Final evening to connect with exhibitors.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Exhibit Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          10:00 p.m.
+        </span>
+								<span class="tag">Exhibitor Tear-down</span>
+							</div>
+							<h3>Exhibitor Tear-Down Begins</h3>
+							<p>Exhibits may be torn down on Saturday night or Sunday morning.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Exhibit Hall</span>
+							</div>
+						</article>
+					</div>
+				</section>
+
+				<section class="day-section" id="sunday" data-day-section>
+					<div class="day-header">
+						<h2>Sunday, April 12, 2026</h2>
+						<span>Prayer &amp; Commissioning</span>
+					</div>
+					<div class="schedule-grid">
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          7:00–7:45 a.m.
+        </span>
+								<span class="tag">United Prayer</span>
+							</div>
+							<h3>United Prayer</h3>
+							<p>Led by Dave Upham, VP of Evangelism.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Prayer Chapel</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          8:00 a.m.
+        </span>
+								<span class="tag">Prayer Breakfast</span>
+							</div>
+							<h3>Welcome, Opening Prayer &amp; Prayer Breakfast</h3>
+							<ul class="event-list">
+								<li><strong>Welcome and opening prayer:</strong> Lorena Marin</li>
+								<li><strong>Special music:</strong> Jack Stout (Turn To Jesus Ministries)</li>
+								<li><strong>Speaker:</strong> “Company Evangelism,” Don Mackintosh</li>
+								<li><strong>Special music:</strong> Melashenko Trio (title TBD)</li>
+								<li><strong>Closing prayer:</strong> Victoria Okotie</li>
+							</ul>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Fellowship Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+        <span class="time-with-icon">
+          <span class="icon">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+  </span>
+          10:00 a.m.
+        </span>
+								<span class="tag">Closing</span>
+							</div>
+							<h3>Dismissal</h3>
+							<p>Safe travels and thank you for serving with ASI Southwest.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Lobby</span>
+							</div>
+						</article>
+					</div>
+				</section>
+
+				<footer>
+					<p>ASI Southwest • Spring Convention 2026 • Renewed &amp; Restored</p>
+				</footer>
+			</div>
+		</main>
+
+		<script>
+			const buttons = document.querySelectorAll(".nav button");
+			const sections = document.querySelectorAll("[data-day-section]");
+
+			const setActiveDay = (day) => {
+				buttons.forEach((button) => {
+					button.classList.toggle("active", button.dataset.day === day);
+				});
+				sections.forEach((section) => {
+					section.style.display = section.id === day ? "block" : "none";
+				});
+			};
+
+			buttons.forEach((button) => {
+				button.addEventListener("click", () => {
+					setActiveDay(button.dataset.day);
+				});
+			});
+
+			const mapLink = document.querySelector("[data-map-link]");
+			if (mapLink) {
+				const address = mapLink.dataset.address || "3200 FM1187, Crowley, Texas 76036";
+				const encodedAddress = encodeURIComponent(address);
+				const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+				const appleMaps = `https://maps.apple.com/?q=${encodedAddress}`;
+				const googleMaps = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+				mapLink.href = isIOS ? appleMaps : googleMaps;
+				mapLink.target = "_blank";
+				mapLink.rel = "noopener noreferrer";
+			}
+
+			const countdown = document.querySelector("[data-countdown]");
+			if (countdown) {
+				const daysEl = countdown.querySelector("[data-days]");
+				const hoursEl = countdown.querySelector("[data-hours]");
+				const minutesEl = countdown.querySelector("[data-minutes]");
+				const secondsEl = countdown.querySelector("[data-seconds]");
+				const targetTime = new Date("2026-04-09T15:00:00-05:00");
+
+				const updateCountdown = () => {
+					const now = new Date();
+					const diff = targetTime - now;
+					if (diff <= 0) {
+						daysEl.textContent = "0";
+						hoursEl.textContent = "0";
+						minutesEl.textContent = "0";
+						secondsEl.textContent = "0";
+						return;
+					}
+					const totalSeconds = Math.floor(diff / 1000);
+					const days = Math.floor(totalSeconds / 86400);
+					const hours = Math.floor((totalSeconds % 86400) / 3600);
+					const minutes = Math.floor((totalSeconds % 3600) / 60);
+					const seconds = totalSeconds % 60;
+					daysEl.textContent = String(days);
+					hoursEl.textContent = String(hours).padStart(2, "0");
+					minutesEl.textContent = String(minutes).padStart(2, "0");
+					secondsEl.textContent = String(seconds).padStart(2, "0");
+				};
+
+				updateCountdown();
+				setInterval(updateCountdown, 1000);
+			}
+
+			const eventCards = document.querySelectorAll(".event-card");
+			eventCards.forEach((card) => {
+				const eventTop = card.querySelector(".event-top");
+				if (!eventTop) {
+					return;
+				}
+				let topRight = eventTop.querySelector(".event-top-right");
+				if (!topRight) {
+					topRight = document.createElement("div");
+					topRight.className = "event-top-right";
+					const tag = eventTop.querySelector(".tag");
+					if (tag) {
+						topRight.appendChild(tag);
+					}
+					eventTop.appendChild(topRight);
+				}
+				const metaRow = card.querySelector(".meta-row");
+				if (!metaRow) {
+					return;
+				}
+				const locationItem = Array.from(metaRow.children).find((item) => item.textContent.trim().startsWith("Location:"));
+				if (locationItem) {
+					const locationText = locationItem.textContent.replace(/^Location:\s*/, "").trim();
+					locationItem.classList.add("top-location");
+					locationItem.innerHTML = `
+						<span class="location-icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24">
+								<path d="M12 21s-6-6.25-6-11a6 6 0 1 1 12 0c0 4.75-6 11-6 11z"></path>
+								<circle cx="12" cy="10" r="2.5"></circle>
+							</svg>
+						</span>
+						<span class="sr-only">Location</span>
+						${locationText}
+					`;
+					topRight.appendChild(locationItem);
+				}
+				if (metaRow.children.length === 0) {
+					metaRow.remove();
+				}
+			});
+
+			const eventListItems = document.querySelectorAll(".event-list li");
+			eventListItems.forEach((item) => {
+				if (item.querySelector(".item-value")) {
+					return;
+				}
+				const label = item.querySelector("strong");
+				if (!label) {
+					return;
+				}
+				let node = label.nextSibling;
+				if (!node) {
+					return;
+				}
+				const value = document.createElement("span");
+				value.className = "item-value";
+				let hasContent = false;
+				while (node) {
+					const next = node.nextSibling;
+					if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() === "") {
+						node = next;
+						continue;
+					}
+					hasContent = true;
+					value.appendChild(node);
+					node = next;
+				}
+				if (hasContent) {
+					item.appendChild(value);
+				}
+			});
+
+			const hero = document.querySelector("header");
+			if (hero) {
+				let ticking = false;
+				const updateParallax = () => {
+					const offset = Math.min(window.scrollY * 0.35, 180);
+					hero.style.backgroundPosition = `center ${-offset}px`;
+					ticking = false;
+				};
+				window.addEventListener("scroll", () => {
+					if (!ticking) {
+						window.requestAnimationFrame(updateParallax);
+						ticking = true;
+					}
+				});
+				updateParallax();
+			}
+
+			setActiveDay("thursday");
+		</script>
+	</body>
+</html>

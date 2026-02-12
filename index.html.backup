@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>ASI Southwest 2026 Spring Convention Schedule</title>
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap");
+
+			:root {
+				color-scheme: light;
+				--bg: #f6f8fb;
+				--surface: #ffffff;
+				--ink: #1f2937;
+				--muted: #6b7280;
+				--brand: #2e7d6f;
+				--brand-2: #6cc4a1;
+				--accent: #f7b267;
+				--ring: rgba(46, 125, 111, 0.25);
+				--shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+				--radius: 22px;
+				--glass: rgba(255, 255, 255, 0.22);
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				font-family: "Manrope", "Segoe UI", system-ui, -apple-system, sans-serif;
+				background: radial-gradient(circle at top, #ffffff, #f0f5f4 40%, #eef2f7 70%);
+				color: var(--ink);
+				letter-spacing: 0.01em;
+			}
+
+			header {
+				background: url("ASISW-2026-hero.png") center/cover;
+				color: #fff;
+				padding: 80px 24px 120px;
+				position: relative;
+				overflow: hidden;
+			}
+
+			header::before {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(120deg, rgba(23, 74, 66, 0.55), rgba(62, 150, 126, 0.45));
+				display: none;
+				pointer-events: none;
+			}
+
+			header::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background:
+					url("https://www.transparenttextures.com/patterns/arches.png"),
+					radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 60%);
+				display: none;
+				pointer-events: none;
+			}
+
+			.container {
+				max-width: 1100px;
+				margin: 0 auto;
+			}
+
+			.hero {
+				position: relative;
+				z-index: 1;
+				display: flex;
+				flex-direction: column;
+				gap: 14px;
+			}
+
+			.logo-row {
+				display: flex;
+				align-items: center;
+				gap: 16px;
+			}
+
+			.logo-row img {
+				height: 64px;
+				width: auto;
+				filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.25));
+			}
+
+			.hero h1 {
+				font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+				margin: 0;
+				font-weight: 600;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+			}
+
+			.hero p {
+				font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+				max-width: 720px;
+				margin: 0;
+				font-family: "Playfair Display", "Manrope", serif;
+				font-weight: 700;
+			}
+
+			.hero-meta {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 16px 28px;
+				font-size: 0.95rem;
+				font-weight: 500;
+			}
+
+			.hero-meta span {
+				background: var(--glass);
+				padding: 8px 14px;
+				border-radius: 999px;
+				backdrop-filter: blur(6px);
+			}
+
+			.hero-meta a {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				background: var(--glass);
+				padding: 8px 14px;
+				border-radius: 999px;
+				backdrop-filter: blur(6px);
+				color: #fff;
+				text-decoration: none;
+				border: 1px solid rgba(255, 255, 255, 0.22);
+				transition: background 0.2s ease, transform 0.2s ease;
+			}
+
+			.hero-meta a:hover {
+				background: rgba(255, 255, 255, 0.32);
+				transform: translateY(-1px);
+			}
+
+			.hero-meta .pin {
+				font-size: 1rem;
+			}
+			.theme-pill {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				background: rgba(255, 255, 255, 0.18);
+				border: 1px solid rgba(255, 255, 255, 0.3);
+				padding: 16px 28px;
+				border-radius: 999px;
+				font-size: clamp(1.6rem, 3.6vw, 2.7rem);
+				letter-spacing: 0.01em;
+				text-transform: lowercase;
+				font-weight: 700;
+				margin: 0;
+				box-shadow: 0 18px 36px rgba(15, 23, 42, 0.22);
+				backdrop-filter: blur(10px);
+			}
+
+			.theme-pill span {
+				font-weight: 700;
+				letter-spacing: 0;
+				text-transform: lowercase;
+				font-size: inherit;
+				font-family: "Playfair Display", "Manrope", serif;
+				line-height: 1.2;
+			}
+
+			main {
+				margin-top: 0;
+				padding: 32px 24px 80px;
+			}
+
+			.nav {
+				display: flex;
+				gap: 12px;
+				flex-wrap: wrap;
+				margin-bottom: 28px;
+				position: sticky;
+				top: 0;
+				background: rgba(246, 248, 251, 0.92);
+				backdrop-filter: blur(12px);
+				padding: 18px 0;
+				z-index: 10;
+			}
+
+			.nav button {
+				border: 1px solid transparent;
+				background: var(--surface);
+				padding: 10px 16px;
+				border-radius: 12px;
+				font-weight: 600;
+				cursor: pointer;
+				box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+				transition: all 0.2s ease;
+			}
+
+			.nav button.active,
+			.nav button:hover {
+				border-color: transparent;
+				color: #fff;
+				background: linear-gradient(120deg, var(--brand), var(--brand-2));
+				box-shadow: 0 10px 22px rgba(46, 125, 111, 0.3);
+			}
+
+			.day-section {
+				margin-bottom: 42px;
+			}
+
+			.day-header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 12px;
+				margin-bottom: 20px;
+			}
+
+			.day-header h2 {
+				margin: 0;
+				font-size: 1.6rem;
+			}
+
+			.day-header span {
+				color: var(--muted);
+				font-weight: 600;
+			}
+
+			.schedule-grid {
+				display: grid;
+				gap: 16px;
+			}
+
+			.event-card {
+				background: var(--surface);
+				border-radius: var(--radius);
+				padding: 20px 22px;
+				box-shadow: var(--shadow);
+				display: grid;
+				gap: 8px;
+				border: 1px solid rgba(226, 232, 240, 0.7);
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
+			}
+
+			.event-card:hover {
+				transform: translateY(-4px);
+				box-shadow: 0 22px 48px rgba(15, 23, 42, 0.12);
+			}
+
+			.event-top {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: space-between;
+				gap: 8px;
+			}
+
+			.time {
+				font-weight: 700;
+				color: var(--brand);
+				font-size: 0.95rem;
+			}
+
+			.tag {
+				background: rgba(247, 178, 103, 0.2);
+				color: #a35b0f;
+				padding: 4px 10px;
+				border-radius: 999px;
+				font-size: 0.75rem;
+				font-weight: 600;
+			}
+
+			.event-card h3 {
+				margin: 0;
+				font-size: 1.1rem;
+			}
+
+			.event-card p {
+				margin: 0;
+				color: var(--muted);
+				line-height: 1.5;
+			}
+
+			.event-list {
+				margin: 0;
+				padding-left: 18px;
+				color: var(--muted);
+				display: grid;
+				gap: 6px;
+				line-height: 1.5;
+			}
+
+			.event-list strong {
+				color: var(--ink);
+			}
+
+			.icon {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 18px;
+				height: 18px;
+				flex-shrink: 0;
+				color: var(--brand);
+			}
+
+			.icon svg {
+				width: 100%;
+				height: 100%;
+				stroke: currentColor;
+				stroke-width: 2;
+				fill: none;
+				stroke-linecap: round;
+				stroke-linejoin: round;
+			}
+
+			.time-with-icon {
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				font-weight: 700;
+				color: var(--brand);
+				font-size: 0.95rem;
+			}
+
+			.meta-row {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px 18px;
+				font-size: 0.88rem;
+				color: var(--muted);
+			}
+
+			.meta-row strong {
+				color: var(--ink);
+			}
+
+			.note {
+				background: linear-gradient(120deg, rgba(46, 125, 111, 0.12), rgba(108, 196, 161, 0.12));
+				border-left: 4px solid var(--brand);
+				padding: 16px 18px;
+				border-radius: 14px;
+				color: var(--muted);
+				margin-bottom: 24px;
+			}
+
+			footer {
+				text-align: center;
+				color: var(--muted);
+				padding-top: 20px;
+			}
+
+			@media (min-width: 900px) {
+				.schedule-grid {
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="container hero">
+				<div class="logo-row">
+					<img src="ASISW-Logo.svg" alt="ASI Southwest logo" />
+				</div>
+				<h1>ASI Southwest 2026 Spring Convention</h1>
+				<div class="theme-pill">
+					<span>renewed &amp; restored: living whole in a broken world</span>
+				</div>
+				<p>Spring Convention Schedule</p>
+				<div class="hero-meta">
+					<span>Stage Manager: Lorena Marin</span>
+					<span>Location: Crowley Seventh-day Adventist Church Campus</span>
+					<a
+						href="https://www.google.com/maps/dir/?api=1&destination=3200%20FM1187%2C%20Crowley%2C%20TX%2076036"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<span class="pin" aria-hidden="true">📍</span>
+						<span>3200 FM1187, Crowley, Texas 76036</span>
+					</a>
+				</div>
+			</div>
+		</header>
+
+		<main>
+			<div class="container">
+
+				<nav class="nav" aria-label="Schedule days">
+					<button class="active" data-day="thursday">Thursday · Apr 9</button>
+					<button data-day="friday">Friday · Apr 10</button>
+					<button data-day="sabbath">Sabbath · Apr 11</button>
+					<button data-day="sunday">Sunday · Apr 12</button>
+				</nav>
+
+				<section class="day-section" id="thursday" data-day-section>
+					<div class="day-header">
+						<h2>Thursday, April 9, 2026</h2>
+						<span>Arrival &amp; Opening Night</span>
+					</div>
+					<div class="schedule-grid">
+						<article class="event-card">
+							<div class="event-top">
+							<span class="time-with-icon">
+								<span class="icon">
+									<svg viewBox="0 0 24 24">
+										<circle cx="12" cy="12" r="10"></circle>
+										<polyline points="12 6 12 12 16 14"></polyline>
+									</svg>
+								</span>
+								3:00–7:00 p.m.
+							</span>
+							<h3>Registration Opens</h3>
+							<p>Check-in, receive badges, and pick up your convention materials.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Lobby</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+							<span class="time-with-icon">
+								<span class="icon">
+									<svg viewBox="0 0 24 24">
+										<circle cx="12" cy="12" r="10"></circle>
+										<polyline points="12 6 12 12 16 14"></polyline>
+									</svg>
+								</span>
+								3:00–7:00 p.m.
+							</span>
+							<h3>Exhibitor Set-up</h3>
+							<p>Exhibitors prepare booths and displays for the convention hall.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Exhibit Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+							<span class="time-with-icon">
+								<span class="icon">
+									<svg viewBox="0 0 24 24">
+										<circle cx="12" cy="12" r="10"></circle>
+										<polyline points="12 6 12 12 16 14"></polyline>
+									</svg>
+								</span>
+								5:30 p.m.
+							</span>
+							<h3>Dinner &amp; ASI/Crowley Prebrief</h3>
+							<p>Meal tickets required. A prebrief with ASI Southwest and Crowley leadership follows dinner.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Fellowship Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">6:30 p.m.</span>
+								<span class="tag">Evening Program</span>
+							</div>
+							<h3>Opening Session</h3>
+							<ul class="event-list">
+								<li><strong>Song service:</strong> Jack Stout (Turn To Jesus Ministries)</li>
+								<li><strong>Welcome and prayer:</strong> Pat Humphrey &amp; Adam Keating</li>
+								<li><strong>Members in Action:</strong> Floyd Courtney</li>
+								<li><strong>Special music:</strong> Hillsboro SDA Choir</li>
+								<li>
+									<strong>Speaker:</strong> “Nutrition vs. Prescription: The Truth About Mental Health Treatments,”
+									Dr. Neil Nedley
+								</li>
+							</ul>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Sanctuary</span>
+								<span><strong>Announcements:</strong> Victoria Okotie</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">8:30–10:00 p.m.</span>
+								<span class="tag">Exhibits Open</span>
+							</div>
+							<h3>Exhibit Hall Opens</h3>
+							<p>Meet partner ministries, authors, and outreach teams.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Exhibit Hall</span>
+							</div>
+						</article>
+					</div>
+				</section>
+
+				<section class="day-section" id="friday" data-day-section>
+					<div class="day-header">
+						<h2>Friday, April 10, 2026</h2>
+						<span>Learning &amp; Seminars</span>
+					</div>
+					<div class="schedule-grid">
+						<article class="event-card">
+							<div class="event-top">
+							<span class="time-with-icon">
+								<span class="icon">
+									<svg viewBox="0 0 24 24">
+										<circle cx="12" cy="12" r="10"></circle>
+										<polyline points="12 6 12 12 16 14"></polyline>
+									</svg>
+								</span>
+								7:45–8:30 a.m.
+							</span>
+							<h3>Breakfast</h3>
+							<p>Start the day with fellowship and a hearty breakfast.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Fellowship Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time-with-icon">
+								<span class="icon">
+									<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+								</span>
+								8:40 a.m.
+							</span>
+								<span class="tag">Morning Program</span>
+							</div>
+							<h3>Morning Worship &amp; Music</h3>
+							<ul class="event-list">
+								<li><strong>Song service:</strong> Jack Stout &amp; Art Humphrey</li>
+								<li><strong>Welcome and prayer:</strong> Paul Ogaga</li>
+								<li><strong>Members in Action:</strong> Pat Humphrey</li>
+								<li><strong>Introduction of speakers:</strong> Jose Rosado</li>
+								<li><strong>Special music:</strong> Melashenko Family</li>
+							</ul>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Sanctuary</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">9:00 a.m.</span>
+								<span class="tag">Speaker</span>
+							</div>
+							<h3>“What’s Love Got to Do with It?”</h3>
+							<p>Don Mackintosh, Senior Pastor, Weimar University Church.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Sanctuary</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">10:00 a.m.</span>
+								<span class="tag">Seminar 1</span>
+							</div>
+							<h3>Title TBD</h3>
+							<p>Claudio Japas, DrPH &amp; Daniel Japas, MD.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Seminar Room A</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">11:00–11:15 a.m.</span>
+								<span class="tag">Break</span>
+							</div>
+							<h3>Refreshment Break</h3>
+							<p>Stretch, connect, and recharge.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Courtyard</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">11:15 a.m.</span>
+								<span class="tag">Seminar 2</span>
+							</div>
+							<h3>“Nature’s Medical Cabinet: Remedies that Work”</h3>
+							<p>Sonja &amp; Dave Upham.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Seminar Room A</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">12:15–1:15 p.m.</span>
+								<span class="tag">Meal Tickets</span>
+							</div>
+							<h3>Lunch</h3>
+							<p>Meal tickets required.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Fellowship Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">12:00–3:00 p.m.</span>
+								<span class="tag">Exhibits Open</span>
+							</div>
+							<h3>Exhibit Hall Open</h3>
+							<p>Explore ministry booths, resources, and networking.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Exhibit Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">1:00–1:25 p.m.</span>
+								<span class="tag">Prayer Time</span>
+							</div>
+							<h3>Revived, Renewed, and Restored</h3>
+							<p>Prayer time led by Dave Upham, VP Evangelism, ASI Southwest.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Prayer Chapel</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">1:30–1:37 p.m.</span>
+								<span class="tag">Afternoon Seminars</span>
+							</div>
+							<h3>Welcome, Prayer &amp; Special Music</h3>
+							<p>Welcome and prayer by Jason Burghart. Special music by Melashenko Trio.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Sanctuary</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">1:37 p.m.</span>
+								<span class="tag">Seminar 3</span>
+							</div>
+							<h3>“Healed with Healing”</h3>
+							<p>Don Mackintosh, Senior Pastor, Weimar University Church.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Seminar Room B</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">2:30 p.m.</span>
+								<span class="tag">Health Focus</span>
+							</div>
+							<h3>Tips for Healthy Living</h3>
+							<p>Maricela Cabrera, MPH, NBC-HWC.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Seminar Room B</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">2:45 p.m.</span>
+								<span class="tag">Seminar 4</span>
+							</div>
+							<h3>“Helping Your Kids Succeed in School”</h3>
+							<p>Eric Walsh, MD/DrPH.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Seminar Room B</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">3:40 p.m.</span>
+								<span class="tag">Seminar 5</span>
+							</div>
+							<h3>“Enhancing Emotional Intelligence”</h3>
+							<p>Dr. Neil Nedley, Medical Director, Nedley Health.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Seminar Room B</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">4:45–6:30 p.m.</span>
+								<span class="tag">Exhibits Open</span>
+							</div>
+							<h3>Exhibit Hall Open</h3>
+							<p>Reconnect with exhibitors and ministry partners.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Exhibit Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">5:30–6:45 p.m.</span>
+								<span class="tag">Dinner</span>
+							</div>
+							<h3>Dinner (Complimentary)</h3>
+							<p>Compliments of Child Impact International. Reservations and meal tickets required.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Fellowship Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">7:00–7:25 p.m.</span>
+								<span class="tag">Prayer Time</span>
+							</div>
+							<h3>Revived, Renewed, and Restored</h3>
+							<p>Prayer time led by Dave Upham, VP Evangelism, ASI Southwest.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Prayer Chapel</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">7:30 p.m.</span>
+								<span class="tag">Evening Program</span>
+							</div>
+							<h3>The Sanctuary &amp; Health</h3>
+							<ul class="event-list">
+								<li><strong>Welcome and prayer:</strong> Nathan Powell</li>
+								<li><strong>ASI Membership Spotlight:</strong> Paul Ogaga</li>
+								<li><strong>Members in Action:</strong> Jason Burghart</li>
+								<li><strong>Special music:</strong> Jackie Walsh</li>
+								<li><strong>Speaker:</strong> Don Mackintosh</li>
+								<li><strong>Closing prayer:</strong> Don Mackintosh</li>
+								<li><strong>Announcements:</strong> Victoria Okotie</li>
+							</ul>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Sanctuary</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">8:30–9:30 p.m.</span>
+								<span class="tag">Non-Commercial Exhibits</span>
+							</div>
+							<h3>Non-Commercial Exhibits Open</h3>
+							<p>Showcase ministry initiatives and outreach projects.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Exhibit Hall</span>
+							</div>
+						</article>
+					</div>
+				</section>
+
+				<section class="day-section" id="sabbath" data-day-section>
+					<div class="day-header">
+						<h2>Sabbath, April 11, 2026</h2>
+						<span>Worship &amp; Celebration</span>
+					</div>
+					<div class="schedule-grid">
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">8:00 a.m.</span>
+								<span class="tag">Meal Tickets</span>
+							</div>
+							<h3>Breakfast</h3>
+							<p>Meal tickets required.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Fellowship Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">9:00 a.m.</span>
+								<span class="tag">Sabbath School</span>
+							</div>
+							<h3>Sabbath School Program</h3>
+							<ul class="event-list">
+								<li><strong>Song service:</strong> Jack Stout</li>
+								<li><strong>Welcome and prayer:</strong> Estar Ogaga</li>
+								<li><strong>Special feature:</strong> “Abundant Life as an Entering Wedge” — Joy Kauffman</li>
+								<li>
+									<strong>Special music:</strong> Kristina &amp; Sofia Stojanovic, Giselle Japas, Karen Savignon
+								</li>
+								<li><strong>Members in Action:</strong> Pat Humphrey</li>
+								<li><strong>Panel:</strong> Sabbath School Panel (title TBD), moderator Don Mackintosh</li>
+								<li><strong>Special music:</strong> Jacquelyn Muse, Sofia Barnes, Enny Infante</li>
+							</ul>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Sanctuary</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">10:30 a.m.</span>
+								<span class="tag">Break</span>
+							</div>
+							<h3>Mid-Morning Break</h3>
+							<p>Refresh and connect before worship.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Courtyard</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">10:45 a.m.</span>
+								<span class="tag">Divine Worship</span>
+							</div>
+							<h3>Divine Worship Service</h3>
+							<ul class="event-list">
+								<li><strong>Introit:</strong> “The Lord Is in His Holy Temple” — Karen Savignon</li>
+								<li><strong>Invocation &amp; welcome:</strong> John Page</li>
+								<li><strong>Welcome &amp; introductions:</strong> Adam Keating &amp; Pat Humphrey</li>
+								<li><strong>Members in Action:</strong> Jose Rosado</li>
+								<li><strong>Offering appeal:</strong> TBD</li>
+								<li><strong>Scripture reading:</strong> Dave Upham &amp; Jose Luis Santa Cruz</li>
+								<li>
+									<strong>Sermon:</strong> “Christ’s Medical Missionary Healing of Body, Soul, &amp; Mind,” Dr. Neil Nedley
+								</li>
+								<li><strong>Special music:</strong> Jacqueline Muse, Sofia Barnes, Enny Infante</li>
+								<li><strong>Special music:</strong> Melashenko Trio (title TBD)</li>
+								<li><strong>Doxology:</strong> “Praise God from Whom All Blessings Flow,” No. 694</li>
+								<li><strong>Closing hymn:</strong> “We Have This Hope,” No. 214</li>
+								<li><strong>Benediction:</strong> Dr. Neil Nedley &amp; Adam Keating</li>
+							</ul>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Sanctuary</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">12:30 p.m.</span>
+								<span class="tag">Complimentary</span>
+							</div>
+							<h3>Lunch</h3>
+							<p>Complimentary lunch (online pre-registration required).</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Fellowship Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">2:00–2:25 p.m.</span>
+								<span class="tag">Prayer Time</span>
+							</div>
+							<h3>Revived, Renewed, and Restored</h3>
+							<p>Prayer time led by Dave Upham, VP Evangelism, ASI Southwest.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Prayer Chapel</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">2:30 p.m.</span>
+								<span class="tag">Afternoon Program</span>
+							</div>
+							<h3>The Vital Role of Your Testimony</h3>
+							<ul class="event-list">
+								<li><strong>Congregational singing:</strong> Jose &amp; Colette Rosado</li>
+								<li><strong>Special music:</strong> Jose &amp; Colette Rosado</li>
+								<li><strong>Speaker:</strong> “The Vital Role of Your Testimony,” Don Mackintosh</li>
+								<li><strong>Testimonies:</strong> Jose Rosado</li>
+								<li><strong>Special music:</strong> Melashenko Trio</li>
+							</ul>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Sanctuary</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">4:30 p.m.</span>
+								<span class="tag">Film</span>
+							</div>
+							<h3>Movie Screening: “Marked for Destruction”</h3>
+							<p>Presented by 3 AM Films.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Media Room</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">5:30 p.m.</span>
+								<span class="tag">Meal Tickets</span>
+							</div>
+							<h3>Dinner</h3>
+							<p>Meal tickets required.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Fellowship Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">7:00 p.m.</span>
+								<span class="tag">Evening Program</span>
+							</div>
+							<h3>Comprehensive Approach to Eradicate Depression &amp; Anxiety</h3>
+							<ul class="event-list">
+								<li><strong>Welcome &amp; prayer:</strong> Cesar Flores</li>
+								<li><strong>Members in Action:</strong> Lorena Marin</li>
+								<li><strong>Special music:</strong> Jackie Walsh (title TBD)</li>
+								<li><strong>Speaker:</strong> Dr. Neil Nedley</li>
+								<li><strong>Special music:</strong> Melashenko Trio (title TBD)</li>
+								<li><strong>Closing prayer &amp; announcements:</strong> Jose Rosado</li>
+							</ul>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Sanctuary</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">8:45–10:00 p.m.</span>
+								<span class="tag">Exhibits Open</span>
+							</div>
+							<h3>Exhibit Hall Open</h3>
+							<p>Final evening to connect with exhibitors.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Exhibit Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">10:00 p.m.</span>
+								<span class="tag">Exhibitor Tear-down</span>
+							</div>
+							<h3>Exhibitor Tear-Down Begins</h3>
+							<p>Exhibits may be torn down on Saturday night or Sunday morning.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Exhibit Hall</span>
+							</div>
+						</article>
+					</div>
+				</section>
+
+				<section class="day-section" id="sunday" data-day-section>
+					<div class="day-header">
+						<h2>Sunday, April 12, 2026</h2>
+						<span>Prayer &amp; Commissioning</span>
+					</div>
+					<div class="schedule-grid">
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">7:00–7:45 a.m.</span>
+								<span class="tag">United Prayer</span>
+							</div>
+							<h3>United Prayer</h3>
+							<p>Led by Dave Upham, VP of Evangelism.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Prayer Chapel</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">8:00 a.m.</span>
+								<span class="tag">Prayer Breakfast</span>
+							</div>
+							<h3>Welcome, Opening Prayer &amp; Prayer Breakfast</h3>
+							<ul class="event-list">
+								<li><strong>Welcome and opening prayer:</strong> Lorena Marin</li>
+								<li><strong>Special music:</strong> Jack Stout (Turn To Jesus Ministries)</li>
+								<li><strong>Speaker:</strong> “Company Evangelism,” Don Mackintosh</li>
+								<li><strong>Special music:</strong> Melashenko Trio (title TBD)</li>
+								<li><strong>Closing prayer:</strong> Victoria Okotie</li>
+							</ul>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Fellowship Hall</span>
+							</div>
+						</article>
+
+						<article class="event-card">
+							<div class="event-top">
+								<span class="time">10:00 a.m.</span>
+								<span class="tag">Closing</span>
+							</div>
+							<h3>Dismissal</h3>
+							<p>Safe travels and thank you for serving with ASI Southwest.</p>
+							<div class="meta-row">
+								<span><strong>Location:</strong> Main Lobby</span>
+							</div>
+						</article>
+					</div>
+				</section>
+
+				<footer>
+					<p>ASI Southwest • Spring Convention 2026 • Renewed &amp; Restored</p>
+				</footer>
+			</div>
+		</main>
+
+		<script>
+			const buttons = document.querySelectorAll(".nav button");
+			const sections = document.querySelectorAll("[data-day-section]");
+
+			const setActiveDay = (day) => {
+				buttons.forEach((button) => {
+					button.classList.toggle("active", button.dataset.day === day);
+				});
+				sections.forEach((section) => {
+					section.style.display = section.id === day ? "block" : "none";
+				});
+			};
+
+			buttons.forEach((button) => {
+				button.addEventListener("click", () => {
+					setActiveDay(button.dataset.day);
+				});
+			});
+
+			setActiveDay("thursday");
+		</script>
+	</body>
+</html>
