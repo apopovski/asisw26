@@ -4,6 +4,11 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>ASI Southwest 2026 Spring Convention Schedule</title>
+		<meta property="og:title" content="ASI Southwest 2026 Spring Convention Schedule" />
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="ASISW-2026.png" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:image" content="ASISW-2026.png" />
 		<style>
 			@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap");
 
@@ -206,6 +211,62 @@
 				margin-top: auto;
 				display: grid;
 				gap: 16px;
+			}
+
+			.featuring {
+				display: grid;
+				gap: 12px;
+				margin-top: 12px;
+			}
+
+			.featuring-title {
+				font-size: 0.85rem;
+				letter-spacing: 0.3em;
+				text-transform: uppercase;
+				font-weight: 600;
+				color: rgba(255, 255, 255, 0.7);
+			}
+
+			.speaker-grid {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 18px;
+			}
+
+			.speaker-card {
+				display: grid;
+				gap: 8px;
+				justify-items: center;
+				min-width: 120px;
+				text-align: center;
+				color: #fff;
+				font-weight: 600;
+			}
+
+			.speaker-photo {
+				width: 86px;
+				height: 86px;
+				border-radius: 999px;
+				overflow: hidden;
+				border: 2px solid rgba(255, 255, 255, 0.65);
+				box-shadow: 0 12px 24px rgba(15, 23, 42, 0.2);
+				background: rgba(255, 255, 255, 0.2);
+				display: grid;
+				place-items: center;
+			}
+
+			.speaker-photo img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+
+			.speaker-placeholder {
+				font-size: 1.1rem;
+				font-weight: 700;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: #ffffff;
 			}
 			.theme-pill {
 				display: inline-flex;
@@ -580,6 +641,29 @@
 						<a class="map-link" data-map-link data-address="3200 FM1187, Crowley, Texas 76036" href="#">
 							Location: Crowley Seventh-day Adventist Church Campus | 3200 FM1187, Crowley, Texas 76036
 						</a>
+					</div>
+					<div class="featuring">
+						<div class="featuring-title">Featuring</div>
+						<div class="speaker-grid">
+							<div class="speaker-card">
+								<div class="speaker-photo">
+									<img src="Neil-Nedley.webp" alt="Neil Nedley, M.D." />
+								</div>
+								<div>Neil Nedley, M.D.</div>
+							</div>
+							<div class="speaker-card">
+								<div class="speaker-photo">
+									<img src="Don-Mackintosh.webp" alt="Don Mackintosh" />
+								</div>
+								<div>Don Mackintosh</div>
+							</div>
+							<div class="speaker-card">
+								<div class="speaker-photo">
+									<img src="JJR2.jpg" alt="Melashenko Trio" />
+								</div>
+								<div>Melashenko Trio</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
