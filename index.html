@@ -1807,7 +1807,10 @@
 
 			const EDIT_PASSWORD_HASH = "71a6b8109ca286da3faa86a1ea3a41019e268058d5e0b602524b87483099dc0c";
 			const EDIT_STORAGE_KEY = "asisw-edit-content-v2";
+			const GLOBAL_CONTENT_URL = "./site-content.json";
+			const PUBLISH_ENDPOINT = ""; // optional: set your secure endpoint URL for global publish
 			let isEditMode = false;
+			let sessionEditPassword = "";
 
 			const sha256 = async (text) => {
 				const encoder = new TextEncoder();
@@ -1872,6 +1875,43 @@
 					payload[idx] = list.innerHTML;
 				});
 				return payload;
+			};
+
+			const buildPayload = () => {
+				const payload = { nodes: {}, eventLists: getEventListPayload() };
+				getEditableNodes().forEach((node, index) => {
+					payload.nodes[index] = node.innerHTML;
+				});
+				return payload;
+			};
+
+			const applyPayload = (saved) => {
+				if (!saved || typeof saved !== "object") return;
+				if (saved.eventLists) {
+					document.querySelectorAll(".event-list").forEach((list, idx) => {
+						if (saved.eventLists[idx] !== undefined) {
+							list.innerHTML = saved.eventLists[idx];
+						}
+					});
+				}
+
+				ensureListItemValueStructure();
+				prepareEditableTopTextNodes();
+				const nodes = getEditableNodes();
+				if (saved.nodes) {
+					nodes.forEach((node, index) => {
+						if (saved.nodes[index] !== undefined) {
+							node.innerHTML = saved.nodes[index];
+						}
+					});
+				} else {
+					// backwards compatibility with v1 format
+					nodes.forEach((node, index) => {
+						if (saved[index] !== undefined) {
+							node.innerHTML = saved[index];
+						}
+					});
+				}
 			};
 
 			const refreshLineControls = () => {
@@ -1956,39 +1996,22 @@
 				} catch {
 					return;
 				}
+				applyPayload(saved);
+			};
 
-				if (saved.eventLists) {
-					document.querySelectorAll(".event-list").forEach((list, idx) => {
-						if (saved.eventLists[idx] !== undefined) {
-							list.innerHTML = saved.eventLists[idx];
-						}
-					});
-				}
-
-				ensureListItemValueStructure();
-				prepareEditableTopTextNodes();
-				const nodes = getEditableNodes();
-				if (saved.nodes) {
-					nodes.forEach((node, index) => {
-						if (saved.nodes[index] !== undefined) {
-							node.innerHTML = saved.nodes[index];
-						}
-					});
-				} else {
-					// backwards compatibility with v1 format
-					nodes.forEach((node, index) => {
-						if (saved[index] !== undefined) {
-							node.innerHTML = saved[index];
-						}
-					});
+			const loadGlobalEdits = async () => {
+				try {
+					const res = await fetch(`${GLOBAL_CONTENT_URL}?v=${Date.now()}`, { cache: "no-store" });
+					if (!res.ok) return;
+					const payload = await res.json();
+					applyPayload(payload);
+				} catch {
+					// no global payload yet; keep baseline HTML
 				}
 			};
 
 			const saveEdits = () => {
-				const payload = { nodes: {}, eventLists: getEventListPayload() };
-				getEditableNodes().forEach((node, index) => {
-					payload.nodes[index] = node.innerHTML;
-				});
+				const payload = buildPayload();
 				localStorage.setItem(EDIT_STORAGE_KEY, JSON.stringify(payload));
 			};
 
@@ -2037,6 +2060,7 @@
 
 			const unlockBtn = makeBtn("Unlock Edit");
 			const saveBtn = makeBtn("Save");
+			const publishBtn = makeBtn("Publish");
 			const resetBtn = makeBtn("Reset");
 			const statusEl = document.createElement("span");
 			statusEl.textContent = "View mode";
@@ -2052,6 +2076,7 @@
 				if (!entered) return;
 				const enteredHash = await sha256(entered);
 				if (enteredHash === EDIT_PASSWORD_HASH) {
+					sessionEditPassword = entered;
 					setEditMode(true);
 				} else {
 					window.alert("Incorrect password");
@@ -2066,6 +2091,44 @@
 				}, 1200);
 			});
 
+			publishBtn.addEventListener("click", async () => {
+				if (!isEditMode) {
+					window.alert("Unlock Edit first.");
+					return;
+				}
+				const payload = buildPayload();
+
+				if (PUBLISH_ENDPOINT) {
+					try {
+						const headers = { "Content-Type": "application/json" };
+						if (sessionEditPassword) {
+							headers["X-Edit-Password"] = sessionEditPassword;
+						}
+						const res = await fetch(PUBLISH_ENDPOINT, {
+							method: "POST",
+							headers,
+							body: JSON.stringify(payload),
+						});
+						if (!res.ok) throw new Error("Publish failed");
+						statusEl.textContent = "Published globally";
+					} catch {
+						statusEl.textContent = "Publish failed";
+					}
+				} else {
+					const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+					const url = URL.createObjectURL(blob);
+					const a = document.createElement("a");
+					a.href = url;
+					a.download = "site-content.json";
+					a.click();
+					URL.revokeObjectURL(url);
+					statusEl.textContent = "Downloaded site-content.json";
+				}
+				setTimeout(() => {
+					statusEl.textContent = isEditMode ? "Edit mode on" : "View mode";
+				}, 1500);
+			});
+
 			resetBtn.addEventListener("click", () => {
 				const ok = window.confirm("Reset all frontend edits on this browser?");
 				if (!ok) return;
@@ -2075,13 +2138,17 @@
 
 			toolbar.appendChild(unlockBtn);
 			toolbar.appendChild(saveBtn);
+			toolbar.appendChild(publishBtn);
 			toolbar.appendChild(resetBtn);
 			toolbar.appendChild(statusEl);
 			document.body.appendChild(toolbar);
 
 			prepareEditableTopTextNodes();
-			applySavedEdits();
-			setEditMode(false);
+			(async () => {
+				await loadGlobalEdits();
+				applySavedEdits();
+				setEditMode(false);
+			})();
 		</script>
 	</body>
 </html>
