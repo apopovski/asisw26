@@ -1804,6 +1804,264 @@
 			}
 
 			setActiveDay("thursday");
+
+			const EDIT_PASSWORD_HASH = "71a6b8109ca286da3faa86a1ea3a41019e268058d5e0b602524b87483099dc0c";
+			const EDIT_STORAGE_KEY = "asisw-edit-content-v2";
+			let isEditMode = false;
+
+			const sha256 = async (text) => {
+				const encoder = new TextEncoder();
+				const data = encoder.encode(text);
+				const digest = await crypto.subtle.digest("SHA-256", data);
+				return Array.from(new Uint8Array(digest))
+					.map((b) => b.toString(16).padStart(2, "0"))
+					.join("");
+			};
+
+			const ensureListItemValueStructure = () => {
+				document.querySelectorAll(".event-list li").forEach((item) => {
+					if (!item.querySelector("strong")) return;
+					if (item.querySelector(".item-value")) return;
+					const label = item.querySelector("strong");
+					let node = label.nextSibling;
+					if (!node) return;
+					const value = document.createElement("span");
+					value.className = "item-value";
+					let hasContent = false;
+					while (node) {
+						const next = node.nextSibling;
+						if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() === "") {
+							node = next;
+							continue;
+						}
+						hasContent = true;
+						value.appendChild(node);
+						node = next;
+					}
+					if (hasContent) item.appendChild(value);
+				});
+			};
+
+			const getEditableNodes = () =>
+				Array.from(
+					document.querySelectorAll(
+						"header h1, .theme-pill span, .theme-date, .hero-meta span, .hero-meta a, .featuring-title, .speaker-card div, .schedule-title, .day-header h2, .day-header span, .nav button, .event-card h3, .event-card p, .event-list li strong, .event-list li .item-value, footer p"
+					)
+				);
+
+			const getEventListPayload = () => {
+				const payload = {};
+				document.querySelectorAll(".event-list").forEach((list, idx) => {
+					payload[idx] = list.innerHTML;
+				});
+				return payload;
+			};
+
+			const refreshLineControls = () => {
+				document.querySelectorAll(".edit-line-controls").forEach((n) => n.remove());
+				document.querySelectorAll(".event-list li").forEach((li) => {
+					const controls = document.createElement("span");
+					controls.className = "edit-line-controls";
+					controls.style.display = isEditMode ? "inline-flex" : "none";
+					controls.style.gap = "4px";
+					controls.style.marginLeft = "8px";
+					controls.style.verticalAlign = "middle";
+
+					const addBtn = document.createElement("button");
+					addBtn.type = "button";
+					addBtn.textContent = "+";
+					addBtn.title = "Add line below";
+					addBtn.style.border = "1px solid rgba(46,125,111,0.4)";
+					addBtn.style.background = "rgba(46,125,111,0.12)";
+					addBtn.style.color = "#1f2937";
+					addBtn.style.borderRadius = "6px";
+					addBtn.style.cursor = "pointer";
+					addBtn.style.fontSize = "11px";
+					addBtn.style.padding = "1px 6px";
+
+					const delBtn = document.createElement("button");
+					delBtn.type = "button";
+					delBtn.textContent = "−";
+					delBtn.title = "Delete this line";
+					delBtn.style.border = "1px solid rgba(220,38,38,0.35)";
+					delBtn.style.background = "rgba(220,38,38,0.12)";
+					delBtn.style.color = "#7f1d1d";
+					delBtn.style.borderRadius = "6px";
+					delBtn.style.cursor = "pointer";
+					delBtn.style.fontSize = "11px";
+					delBtn.style.padding = "1px 6px";
+
+					addBtn.addEventListener("click", (e) => {
+						e.preventDefault();
+						e.stopPropagation();
+						if (!isEditMode) return;
+						const newLi = document.createElement("li");
+						newLi.innerHTML = '<strong>New item:</strong><span class="item-value"> Edit text</span>';
+						li.parentElement.insertBefore(newLi, li.nextSibling);
+						refreshLineControls();
+						setEditMode(true);
+						const value = newLi.querySelector(".item-value");
+						if (value) {
+							value.focus();
+						}
+					});
+
+					delBtn.addEventListener("click", (e) => {
+						e.preventDefault();
+						e.stopPropagation();
+						if (!isEditMode) return;
+						const list = li.parentElement;
+						if (list.querySelectorAll("li").length <= 1) {
+							const strong = li.querySelector("strong");
+							const value = li.querySelector(".item-value");
+							if (strong) strong.textContent = "New item:";
+							if (value) value.textContent = " Edit text";
+							return;
+						}
+						li.remove();
+						refreshLineControls();
+						setEditMode(true);
+					});
+
+					controls.appendChild(addBtn);
+					controls.appendChild(delBtn);
+					li.appendChild(controls);
+				});
+			};
+
+			const applySavedEdits = () => {
+				const raw = localStorage.getItem(EDIT_STORAGE_KEY);
+				if (!raw) return;
+				let saved;
+				try {
+					saved = JSON.parse(raw);
+				} catch {
+					return;
+				}
+
+				if (saved.eventLists) {
+					document.querySelectorAll(".event-list").forEach((list, idx) => {
+						if (saved.eventLists[idx] !== undefined) {
+							list.innerHTML = saved.eventLists[idx];
+						}
+					});
+				}
+
+				ensureListItemValueStructure();
+				const nodes = getEditableNodes();
+				if (saved.nodes) {
+					nodes.forEach((node, index) => {
+						if (saved.nodes[index] !== undefined) {
+							node.innerHTML = saved.nodes[index];
+						}
+					});
+				} else {
+					// backwards compatibility with v1 format
+					nodes.forEach((node, index) => {
+						if (saved[index] !== undefined) {
+							node.innerHTML = saved[index];
+						}
+					});
+				}
+			};
+
+			const saveEdits = () => {
+				const payload = { nodes: {}, eventLists: getEventListPayload() };
+				getEditableNodes().forEach((node, index) => {
+					payload.nodes[index] = node.innerHTML;
+				});
+				localStorage.setItem(EDIT_STORAGE_KEY, JSON.stringify(payload));
+			};
+
+			const setEditMode = (enabled) => {
+				isEditMode = enabled;
+				const nodes = getEditableNodes();
+				nodes.forEach((node) => {
+					node.contentEditable = enabled ? "true" : "false";
+					node.spellcheck = enabled;
+					node.style.outline = enabled ? "1px dashed rgba(46, 125, 111, 0.5)" : "none";
+					node.style.outlineOffset = enabled ? "2px" : "0";
+					node.style.cursor = enabled ? "text" : "inherit";
+				});
+				refreshLineControls();
+				unlockBtn.textContent = enabled ? "Lock" : "Unlock Edit";
+				statusEl.textContent = enabled ? "Edit mode on" : "View mode";
+			};
+
+			const toolbar = document.createElement("div");
+			toolbar.style.position = "fixed";
+			toolbar.style.right = "16px";
+			toolbar.style.bottom = "16px";
+			toolbar.style.zIndex = "9999";
+			toolbar.style.display = "flex";
+			toolbar.style.gap = "8px";
+			toolbar.style.alignItems = "center";
+			toolbar.style.padding = "10px 12px";
+			toolbar.style.borderRadius = "12px";
+			toolbar.style.background = "rgba(17, 24, 39, 0.92)";
+			toolbar.style.color = "#fff";
+			toolbar.style.boxShadow = "0 10px 28px rgba(0,0,0,0.28)";
+
+			const makeBtn = (text) => {
+				const btn = document.createElement("button");
+				btn.type = "button";
+				btn.textContent = text;
+				btn.style.border = "1px solid rgba(255,255,255,0.25)";
+				btn.style.background = "rgba(255,255,255,0.08)";
+				btn.style.color = "#fff";
+				btn.style.padding = "7px 10px";
+				btn.style.borderRadius = "8px";
+				btn.style.cursor = "pointer";
+				btn.style.fontSize = "12px";
+				return btn;
+			};
+
+			const unlockBtn = makeBtn("Unlock Edit");
+			const saveBtn = makeBtn("Save");
+			const resetBtn = makeBtn("Reset");
+			const statusEl = document.createElement("span");
+			statusEl.textContent = "View mode";
+			statusEl.style.fontSize = "12px";
+			statusEl.style.opacity = "0.9";
+
+			unlockBtn.addEventListener("click", async () => {
+				if (isEditMode) {
+					setEditMode(false);
+					return;
+				}
+				const entered = window.prompt("Enter edit password");
+				if (!entered) return;
+				const enteredHash = await sha256(entered);
+				if (enteredHash === EDIT_PASSWORD_HASH) {
+					setEditMode(true);
+				} else {
+					window.alert("Incorrect password");
+				}
+			});
+
+			saveBtn.addEventListener("click", () => {
+				saveEdits();
+				statusEl.textContent = "Saved";
+				setTimeout(() => {
+					statusEl.textContent = isEditMode ? "Edit mode on" : "View mode";
+				}, 1200);
+			});
+
+			resetBtn.addEventListener("click", () => {
+				const ok = window.confirm("Reset all frontend edits on this browser?");
+				if (!ok) return;
+				localStorage.removeItem(EDIT_STORAGE_KEY);
+				window.location.reload();
+			});
+
+			toolbar.appendChild(unlockBtn);
+			toolbar.appendChild(saveBtn);
+			toolbar.appendChild(resetBtn);
+			toolbar.appendChild(statusEl);
+			document.body.appendChild(toolbar);
+
+			applySavedEdits();
+			refreshLineControls();
 		</script>
 	</body>
 </html>
