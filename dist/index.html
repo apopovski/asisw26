@@ -1746,7 +1746,7 @@
 							</svg>
 						</span>
 						<span class="sr-only">Location</span>
-						${locationText}
+						<span class="location-text">${locationText}</span>
 					`;
 					topRight.appendChild(locationItem);
 				}
@@ -1842,10 +1842,27 @@
 				});
 			};
 
+			const wrapEditableTextNode = (el, className) => {
+				if (!el || el.querySelector(`.${className}`)) return;
+				for (const node of Array.from(el.childNodes)) {
+					if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+						const span = document.createElement("span");
+						span.className = className;
+						span.textContent = node.textContent;
+						el.replaceChild(span, node);
+					}
+				}
+			};
+
+			const prepareEditableTopTextNodes = () => {
+				document.querySelectorAll(".time-with-icon").forEach((el) => wrapEditableTextNode(el, "editable-time-text"));
+				document.querySelectorAll(".tag").forEach((el) => wrapEditableTextNode(el, "editable-tag-text"));
+			};
+
 			const getEditableNodes = () =>
 				Array.from(
 					document.querySelectorAll(
-						"header h1, .theme-pill span, .theme-date, .hero-meta span, .hero-meta a, .featuring-title, .speaker-card div, .schedule-title, .day-header h2, .day-header span, .nav button, .event-card h3, .event-card p, .event-list li strong, .event-list li .item-value, footer p"
+						"header h1, .theme-pill span, .theme-date, .hero-meta span, .hero-meta a, .featuring-title, .speaker-card div, .schedule-title, .day-header h2, .day-header span, .nav button, .event-card h3, .event-card p, .event-list li strong, .event-list li .item-value, .editable-time-text, .editable-tag-text, .location-text, footer p"
 					)
 				);
 
@@ -1930,6 +1947,7 @@
 			};
 
 			const applySavedEdits = () => {
+				prepareEditableTopTextNodes();
 				const raw = localStorage.getItem(EDIT_STORAGE_KEY);
 				if (!raw) return;
 				let saved;
@@ -1948,6 +1966,7 @@
 				}
 
 				ensureListItemValueStructure();
+				prepareEditableTopTextNodes();
 				const nodes = getEditableNodes();
 				if (saved.nodes) {
 					nodes.forEach((node, index) => {
@@ -2060,8 +2079,9 @@
 			toolbar.appendChild(statusEl);
 			document.body.appendChild(toolbar);
 
+			prepareEditableTopTextNodes();
 			applySavedEdits();
-			refreshLineControls();
+			setEditMode(false);
 		</script>
 	</body>
 </html>
