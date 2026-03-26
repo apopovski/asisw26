@@ -1809,8 +1809,10 @@
 			const EDIT_STORAGE_KEY = "asisw-edit-content-v2";
 			const GLOBAL_CONTENT_URL = "./site-content.json";
 			const PUBLISH_ENDPOINT = ""; // optional: set your secure endpoint URL for global publish
+			const AUTOSAVE_DELAY_MS = 900;
 			let isEditMode = false;
 			let sessionEditPassword = "";
+			let autosaveTimer = null;
 
 			const sha256 = async (text) => {
 				const encoder = new TextEncoder();
@@ -1957,6 +1959,7 @@
 						li.parentElement.insertBefore(newLi, li.nextSibling);
 						refreshLineControls();
 						setEditMode(true);
+						queueAutosave();
 						const value = newLi.querySelector(".item-value");
 						if (value) {
 							value.focus();
@@ -1973,11 +1976,13 @@
 							const value = li.querySelector(".item-value");
 							if (strong) strong.textContent = "New item:";
 							if (value) value.textContent = " Edit text";
+							queueAutosave();
 							return;
 						}
 						li.remove();
 						refreshLineControls();
 						setEditMode(true);
+						queueAutosave();
 					});
 
 					controls.appendChild(addBtn);
@@ -2015,8 +2020,26 @@
 				localStorage.setItem(EDIT_STORAGE_KEY, JSON.stringify(payload));
 			};
 
+			const queueAutosave = () => {
+				if (!isEditMode) return;
+				if (autosaveTimer) {
+					clearTimeout(autosaveTimer);
+				}
+				autosaveTimer = setTimeout(() => {
+					saveEdits();
+					statusEl.textContent = "Autosaved";
+					setTimeout(() => {
+						statusEl.textContent = isEditMode ? "Edit mode on" : "View mode";
+					}, 900);
+				}, AUTOSAVE_DELAY_MS);
+			};
+
 			const setEditMode = (enabled) => {
 				isEditMode = enabled;
+				if (!enabled && autosaveTimer) {
+					clearTimeout(autosaveTimer);
+					autosaveTimer = null;
+				}
 				const nodes = getEditableNodes();
 				nodes.forEach((node) => {
 					node.contentEditable = enabled ? "true" : "false";
@@ -2142,6 +2165,15 @@
 			toolbar.appendChild(resetBtn);
 			toolbar.appendChild(statusEl);
 			document.body.appendChild(toolbar);
+
+			document.addEventListener("input", (event) => {
+				if (!isEditMode) return;
+				const target = event.target;
+				if (!(target instanceof Element)) return;
+				const editableHost = target.closest("[contenteditable='true']");
+				if (!editableHost) return;
+				queueAutosave();
+			});
 
 			prepareEditableTopTextNodes();
 			(async () => {
