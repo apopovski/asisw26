@@ -2053,19 +2053,15 @@
 				statusEl.textContent = enabled ? "Edit mode on" : "View mode";
 			};
 
-			const toolbar = document.createElement("div");
-			toolbar.style.position = "fixed";
-			toolbar.style.right = "16px";
-			toolbar.style.bottom = "16px";
-			toolbar.style.zIndex = "9999";
-			toolbar.style.display = "flex";
-			toolbar.style.gap = "8px";
-			toolbar.style.alignItems = "center";
-			toolbar.style.padding = "10px 12px";
-			toolbar.style.borderRadius = "12px";
-			toolbar.style.background = "rgba(17, 24, 39, 0.92)";
-			toolbar.style.color = "#fff";
-			toolbar.style.boxShadow = "0 10px 28px rgba(0,0,0,0.28)";
+			const editorDock = document.createElement("div");
+			editorDock.style.position = "fixed";
+			editorDock.style.right = "16px";
+			editorDock.style.bottom = "16px";
+			editorDock.style.zIndex = "9999";
+			editorDock.style.display = "flex";
+			editorDock.style.flexDirection = "column";
+			editorDock.style.alignItems = "flex-end";
+			editorDock.style.gap = "8px";
 
 			const makeBtn = (text) => {
 				const btn = document.createElement("button");
@@ -2089,6 +2085,44 @@
 			statusEl.textContent = "View mode";
 			statusEl.style.fontSize = "12px";
 			statusEl.style.opacity = "0.9";
+
+			const panel = document.createElement("div");
+			panel.style.display = "none";
+			panel.style.gap = "8px";
+			panel.style.alignItems = "center";
+			panel.style.padding = "10px 12px";
+			panel.style.borderRadius = "12px";
+			panel.style.background = "rgba(17, 24, 39, 0.92)";
+			panel.style.color = "#fff";
+			panel.style.boxShadow = "0 10px 28px rgba(0,0,0,0.28)";
+
+			const launcherBtn = makeBtn("✎");
+			launcherBtn.setAttribute("aria-label", "Toggle editor controls");
+			launcherBtn.style.width = "44px";
+			launcherBtn.style.height = "44px";
+			launcherBtn.style.borderRadius = "999px";
+			launcherBtn.style.padding = "0";
+			launcherBtn.style.fontSize = "18px";
+			launcherBtn.style.fontWeight = "700";
+			launcherBtn.style.boxShadow = "0 8px 18px rgba(0,0,0,0.22)";
+
+			let panelOpen = false;
+			const setPanelOpen = (open) => {
+				panelOpen = open;
+				panel.style.display = open ? "flex" : "none";
+				launcherBtn.textContent = open ? "×" : "✎";
+			};
+
+			launcherBtn.addEventListener("click", (e) => {
+				e.stopPropagation();
+				setPanelOpen(!panelOpen);
+			});
+
+			document.addEventListener("click", (e) => {
+				if (!panelOpen) return;
+				if (editorDock.contains(e.target)) return;
+				setPanelOpen(false);
+			});
 
 			unlockBtn.addEventListener("click", async () => {
 				if (isEditMode) {
@@ -2159,12 +2193,14 @@
 				window.location.reload();
 			});
 
-			toolbar.appendChild(unlockBtn);
-			toolbar.appendChild(saveBtn);
-			toolbar.appendChild(publishBtn);
-			toolbar.appendChild(resetBtn);
-			toolbar.appendChild(statusEl);
-			document.body.appendChild(toolbar);
+			panel.appendChild(unlockBtn);
+			panel.appendChild(saveBtn);
+			panel.appendChild(publishBtn);
+			panel.appendChild(resetBtn);
+			panel.appendChild(statusEl);
+			editorDock.appendChild(panel);
+			editorDock.appendChild(launcherBtn);
+			document.body.appendChild(editorDock);
 
 			document.addEventListener("input", (event) => {
 				if (!isEditMode) return;
