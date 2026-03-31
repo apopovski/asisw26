@@ -147,6 +147,18 @@
 				transform: translateY(-1px);
 			}
 
+			.hero-meta a.projects-link {
+				background: linear-gradient(120deg, var(--brand), var(--brand-2));
+				border-color: transparent;
+				font-weight: 700;
+				box-shadow: 0 12px 24px rgba(46, 125, 111, 0.36);
+			}
+
+			.hero-meta a.projects-link:hover {
+				background: linear-gradient(120deg, #257162, #5bb794);
+				transform: translateY(-1px) scale(1.01);
+			}
+
 			.hero-meta .pin {
 				font-size: 1rem;
 			}
@@ -342,6 +354,29 @@
 				background: linear-gradient(120deg, var(--brand), var(--brand-2));
 				box-shadow: 0 12px 26px rgba(46, 125, 111, 0.35);
 				transform: translateY(-1px);
+			}
+
+			.nav .projects-nav-link {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 6px;
+				padding: 10px 20px;
+				border-radius: 999px;
+				text-decoration: none;
+				font-weight: 700;
+				letter-spacing: 0.01em;
+				color: #fff;
+				background: linear-gradient(120deg, #1f5e54, #2e7d6f 45%, #6cc4a1);
+				box-shadow: 0 12px 26px rgba(46, 125, 111, 0.35);
+				margin-left: auto;
+				transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+			}
+
+			.nav .projects-nav-link:hover {
+				transform: translateY(-1px);
+				box-shadow: 0 16px 30px rgba(46, 125, 111, 0.42);
+				filter: brightness(1.03);
 			}
 
 			.day-section {
@@ -601,6 +636,14 @@
 					white-space: nowrap;
 				}
 			}
+
+			@media (max-width: 760px) {
+				.nav .projects-nav-link {
+					margin-left: 0;
+					width: 100%;
+					order: -1;
+				}
+			}
 		</style>
 	</head>
 	<body>
@@ -641,7 +684,7 @@
 						<a class="map-link" data-map-link data-address="3200 FM1187, Crowley, Texas 76036" href="#">
 							Location: Crowley Seventh-day Adventist Church Campus | 3200 FM1187, Crowley, Texas 76036
 						</a>
-						<a href="projects.html">Projects</a>
+						<a class="projects-link" href="projects.html">✨ Projects</a>
 					</div>
 					<div class="featuring">
 						<div class="featuring-title">Featuring</div>
@@ -675,6 +718,7 @@
 				<h2 class="schedule-title">Spring Convention Schedule</h2>
 
 				<nav class="nav" aria-label="Schedule days">
+					<a class="projects-nav-link" href="projects.html">✨ View Projects</a>
 					<button class="active" data-day="thursday">Thursday · April 9</button>
 					<button data-day="friday">Friday · April 10</button>
 					<button data-day="sabbath">Sabbath · April 11</button>
