@@ -86,6 +86,35 @@
 				font-weight: 600;
 			}
 
+			.brand-actions {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				flex-wrap: wrap;
+				justify-content: flex-end;
+			}
+
+			.donate-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				padding: 9px 14px;
+				border-radius: 999px;
+				background: linear-gradient(120deg, #0070ba, #003087);
+				border: 1px solid rgba(255, 255, 255, 0.35);
+				color: #fff;
+				text-decoration: none;
+				font-weight: 700;
+				box-shadow: 0 10px 22px rgba(0, 73, 153, 0.3);
+				transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+			}
+
+			.donate-link:hover {
+				transform: translateY(-1px);
+				box-shadow: 0 14px 28px rgba(0, 73, 153, 0.4);
+				filter: brightness(1.03);
+			}
+
 			.hero-copy {
 				position: relative;
 				z-index: 1;
@@ -213,7 +242,10 @@
 			<div class="container">
 				<div class="brand-row">
 					<img src="ASISW-Logo.svg" alt="ASI Southwest logo" />
-					<a class="back-link" href="index.html">← Back to Schedule</a>
+					<div class="brand-actions">
+						<a class="donate-link" href="https://www.paypal.com/donate/?hosted_button_id=EV2LNL35ATNB6" target="_blank" rel="noopener noreferrer">💝 Projects Donation</a>
+						<a class="back-link" href="index.html">← Back to Schedule</a>
+					</div>
 				</div>
 				<div class="hero-copy">
 					<h1>ASI Southwest 2026 Mission Projects</h1>
