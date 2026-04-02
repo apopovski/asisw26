@@ -185,6 +185,23 @@
 				color: var(--muted);
 			}
 
+			.project-extra-images {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+				gap: 10px;
+				margin-top: 8px;
+			}
+
+			.project-extra-images img {
+				width: 100%;
+				height: 96px;
+				object-fit: cover;
+				border-radius: 12px;
+				border: 1px solid rgba(148, 163, 184, 0.2);
+				background: #f8fafc;
+				padding: 0;
+			}
+
 			.gallery-wrap {
 				margin-top: 34px;
 				padding-top: 10px;
@@ -227,6 +244,31 @@
 			}
 
 			@media (max-width: 860px) {
+				.brand-row {
+					flex-direction: column;
+					align-items: stretch;
+					gap: 14px;
+				}
+
+				.brand-row img {
+					height: 54px;
+					align-self: flex-start;
+				}
+
+				.brand-actions {
+					width: 100%;
+					display: grid;
+					grid-template-columns: 1fr;
+					gap: 10px;
+				}
+
+				.brand-actions a {
+					width: 100%;
+					justify-content: center;
+					text-align: center;
+					padding: 12px 14px;
+				}
+
 				.project-card {
 					grid-template-columns: 1fr;
 				}
@@ -234,6 +276,10 @@
 				.project-card img {
 					height: auto;
 					min-height: 220px;
+				}
+
+				.project-extra-images {
+					grid-template-columns: repeat(2, minmax(0, 1fr));
 				}
 			}
 		</style>
@@ -262,64 +308,48 @@
 			<div class="container">
 				<section class="project-grid" aria-label="Project descriptions">
 					<article class="project-card">
-						<img src="projects-images/image1.png" alt="Farm STEW project image" loading="lazy" />
+						<img src="https://cdn.prod.website-files.com/670010b3e40adf4e2ba327c3/671a6820a969114db00c8c63_FARM%20STEW%20horiz%20logo-2024-no%20slogan.avif" alt="FARM STEW logo" loading="lazy" />
 						<div class="project-body">
 							<h2>FARM STEW</h2>
 							<p>
-								FARM STEW aims to fight extreme poverty and malnutrition in Africa—particularly in
-								Uganda, South Sudan, and Zimbabwe—by training rural families in sustainable
-								agriculture, nutrition, hygiene, and access to clean water.
+								FARM STEW aims to fight extreme poverty and malnutrition in Africa—particularly in Uganda, South Sudan, and Zimbabwe—by training rural families in sustainable agriculture, nutrition, hygiene, and access to clean water. Their holistic "recipe" involves practical, local training to grow food, improve health, and establish income-generating savings groups. Project funding will go toward entering a new area of Renk, South Sudan, with a three-year plan for hands-on farm training with three full-time workers, their training, transport, and supplies to equip families for a more abundant life.
 							</p>
-							<p>
-								Project funding supports a new area in Renk, South Sudan, with a three-year plan for
-								hands-on farm training with three full-time workers, including worker training,
-								transport, and supplies.
-							</p>
+							<div class="project-extra-images">
+								<img src="https://cdn.prod.website-files.com/670010b3e40adf4e2ba327c3/6700204cfc0ec5ff38d37f32_Farming-2022-07-24_FS-Ug_Iganga_Bunaya_Nakantu_Mom-Latrine-Garden-7-kids-edited-hat_42-HiRes-72.avif" alt="FARM STEW community agriculture program" loading="lazy" />
+							</div>
 						</div>
 					</article>
 
 					<article class="project-card">
-						<img src="projects-images/image2.jpeg" alt="Southwestern Adventist University mission image" loading="lazy" />
+						<img src="https://swau.edu/assets/Navajo__-__Mission__-__Web__-__Banner2_01.webp" alt="Southwestern Adventist University mission project" loading="lazy" />
 						<div class="project-body">
 							<h2>Southwestern Adventist University (SWAU)</h2>
 							<p>
-								Building on nearly two decades of service, SWAU is preparing another mission trip of
-								40 students to the Navajo Nation.
-							</p>
-							<p>
-								Funding supports construction and upkeep projects, health seminar outreach,
-								Senior Center support, five days of service initiatives, and youth programming.
+								Southwestern Adventist University (SWAU) is a private Adventist university in Keene, Texas. Building on a legacy of almost 20 years, SWAU will again be hosting a mission trip for 40 SWAU students to the Navajo Nation. Project funding will go toward routine construction and upkeep projects as well as launching a health seminar. Projects include routine services, five days of outreach, support of Senior Centers, and youth programs.
 							</p>
 						</div>
 					</article>
 
 					<article class="project-card">
-						<img src="projects-images/image3.jpeg" alt="La Vida Mission project image" loading="lazy" />
+						<img src="https://asisw26.vercel.app/projects-images/image5.png" alt="La Vida Mission project image" loading="lazy" />
 						<div class="project-body">
 							<h2>La Vida Mission</h2>
 							<p>
-								Serving the Navajo Nation for 60 years, La Vida Mission provides education through a
-								K–8 boarding school, community outreach, free education, and clean water support.
+								La Vida Mission serves the Navajo Nation for the past 60 years. Its primary mission is to provide education through a K-8 boarding school and share the gospel of Jesus, focusing on community outreach, offering free education, a free water supply to local families, and a local church. Project funding will go toward purchasing a multi-use tractor for agricultural, road, and sewer work, as well as for pulling vehicles that get stuck.
 							</p>
-							<p>
-								Project funding will purchase a multi-use tractor for agricultural operations,
-								road and sewer work, and vehicle recovery support.
-							</p>
+							<div class="project-extra-images">
+								<img src="https://asisw26.vercel.app/projects-images/image6.png" alt="La Vida Mission outreach" loading="lazy" />
+								<img src="https://asisw26.vercel.app/projects-images/image7.png" alt="La Vida Mission service project" loading="lazy" />
+							</div>
 						</div>
 					</article>
 
 					<article class="project-card">
-						<img src="projects-images/image4.png" alt="Build and Restore International project image" loading="lazy" />
+						<img src="https://images.squarespace-cdn.com/content/v1/5f3f47d6e575da125782cca5/2259f736-d31c-4fdb-87c5-0a4ba936bdcf/PHOTO-2025-05-23-08-53-52.jpg" alt="Build and Restore International project image" loading="lazy" />
 						<div class="project-body">
 							<h2>Build and Restore International</h2>
 							<p>
-								Build and Restore International mobilizes volunteers worldwide to build and restore
-								churches, schools, and community facilities.
-							</p>
-							<p>
-								Funds support renovation of a Houston-area learning center featuring a lifestyle
-								center, trade academy, and farm with services including education, oxygen therapy,
-								massage, and health coaching.
+								Build and Restore International mobilizes volunteers from around the globe to build and restore churches, schools, and other facilities. Through these projects, they seek to enhance the physical and spiritual well-being of communities, fostering hope and transforming lives. Project funds will go toward renovation of a Houston, Texas area project to create a learning center to include a lifestyle center, trade academy, and farm to provide education, trades, oxygen therapy, massage, and health coaching to those in need.
 							</p>
 						</div>
 					</article>
@@ -329,93 +359,64 @@
 						<div class="project-body">
 							<h2>Narrow Way Ministries</h2>
 							<p>
-								Narrow Way Ministries is a full-spectrum faith ministry of message, mission, and
-								music, focused on ministry to individuals seeking freedom from the LGBT+ lifestyle.
-							</p>
-							<p>
-								Project support enables a stand-alone server repository for testimonies connected to
-								their documentary on religious liberty, freedom of speech, and conversion therapy.
+								Narrow Way Ministries is a full-spectrum faith ministry of message, mission, and music, focused on delivering individuals from the LGBT+ lifestyle. Project funds will support a stand-alone server to host a repository of testimonies from the recent full-feature documentary on religious liberty, freedom of speech, and conversion therapy.
 							</p>
 						</div>
 					</article>
 
 					<article class="project-card">
-						<img src="projects-images/image6.png" alt="Creation Illustrated project image" loading="lazy" />
+						<img src="https://www.creationillustrated.com/wp-content/uploads/2025/12/CI-Winter-home-page-1.png" alt="Creation Illustrated project image" loading="lazy" />
 						<div class="project-body">
 							<h2>Creation Illustrated</h2>
 							<p>
-								Creation Illustrated shares biblical truth and character-building lessons by
-								highlighting the wonders of God’s creation and revealing insights into His wisdom,
-								love, and design.
-							</p>
-							<p>
-								Funding supports distribution of current and back-issue magazines to prison inmates
-								through chaplains and ministry partnerships.
+								Creation Illustrated ministry is dedicated to the eternal impact of sharing Biblical truth and character-building lessons with the purpose of sharing the wonders of God’s creation. By revealing fresh insights of His infinite wisdom, gentle touch, undeniable justice, redeeming love, and flawless design, pure truth shall bring renewed peace. Project funding will go toward distributing Creation Illustrated magazines (and back issues) to prison inmates with the help of Chaplains and Ministry relationships.
 							</p>
 						</div>
 					</article>
 
 					<article class="project-card">
-						<img src="projects-images/image7.png" alt="Profeteia Ministries project image" loading="lazy" />
+						<img src="https://yt3.googleusercontent.com/WwRoGflnRkBnseBA0EVbGT332JxBqz0w3sygAo8iWKlnDDXkSOt5_twAGe4kp5wx1Ayq250Hl6c=s160-c-k-c0x00ffffff-no-rj" alt="Profeteia Ministries logo" loading="lazy" />
 						<div class="project-body">
 							<h2>Profeteia Ministries</h2>
 							<p>
-								Founded in Argentina, Profeteia Ministries proclaims the gospel and biblical prophecy
-								through Spanish-language digital platforms with a broad audience.
+								Profeteia Ministries is dedicated to proclaiming the gospel and biblical prophecy through digital platforms in Spanish. The ministry was founded in Argentina and has developed a significant audience of 120k subscribers and some videos with over 1MM views, including a growing presence in the United States. Project funding will go toward creating a free digital Bible Study platform (on twelve foundational Adventist teachings) that guides individuals from Bible studies to connection with a local SDA church.
 							</p>
-							<p>
-								Project funding will develop a free digital Bible study platform on twelve
-								foundational Adventist teachings, guiding people toward connection with local SDA
-								churches.
-							</p>
+							<div class="project-extra-images">
+								<img src="https://i.ytimg.com/vi/MEPo6saQhC8/hqdefault.jpg" alt="Profeteia Ministries media content" loading="lazy" />
+							</div>
 						</div>
 					</article>
 
 					<article class="project-card">
-						<img src="projects-images/image8.jpeg" alt="Ouachita Hills Academy project image" loading="lazy" />
+						<img src="https://www.ohacademy.org/build/image/5510.jpg" alt="Ouachita Hills Academy project image" loading="lazy" />
 						<div class="project-body">
 							<h2>Ouachita Hills Academy (OHA)</h2>
 							<p>
-								OHA is a Seventh-day Adventist supporting ministry school in southwest Arkansas,
-								focused on nurturing students in a relationship with Jesus and preparing them for
-								service.
-							</p>
-							<p>
-								Project support will purchase multiple cameras for a campus security system to deter
-								crime, protect students and staff, and improve accountability.
+								Ouachita Hills Academy (OHA) is a Seventh-day Adventist supporting ministry school located in southwest Arkansas. The lovely, natural setting of the campus and the peaceful surroundings provide a welcome retreat for students and staff alike. The mission of OHA is to nurture its students in a personal relationship with Jesus, to educate them for a life of service, and to train them to take the gospel to the world. Project funding will go toward purchasing multiple cameras as part of a security system to deter crime, provide protection, and provide accountability.
 							</p>
 						</div>
 					</article>
 
 					<article class="project-card">
-						<img src="projects-images/image9.jpeg" alt="Ouachita Hills College project image" loading="lazy" />
+						<img src="https://images.squarespace-cdn.com/content/v1/5b7496df55b02ca4a8bef72f/1630423311106-WNREFS2R2BRS6HSG5SH7/DSC00473.jpg?format=2500w" alt="Ouachita Hills College project image" loading="lazy" />
 						<div class="project-body">
 							<h2>Ouachita Hills College (OHC)</h2>
 							<p>
-								OHC is a self-supporting Seventh-day Adventist educational organization providing
-								Christ-centered, character-oriented education that equips students for profession and
-								mission.
-							</p>
-							<p>
-								Funding goes toward cafeteria upgrades including new fans, a PA system, and wall
-								sound treatment to support meals and other large gatherings.
+								Ouachita Hills College (OHC) is a self-supporting Seventh-day Adventist educational organization. OHC exists to provide a Christ-centered, character-oriented education that equips students to be successful in their chosen profession, to be active soul winners, and to demonstrate the power of implementing God’s counsel for the Seventh-day Adventist church. Project funding will go toward cafeteria upgrades, including new fans, a P.A. system, and wall sound tiles to support other meetings and uses of the cafeteria.
 							</p>
 						</div>
 					</article>
 
 					<article class="project-card">
-						<img src="projects-images/image10.png" alt="Child Impact International project image" loading="lazy" />
+						<img src="https://childimpact.org/wp-content/uploads/2023/09/CII-Logo-Final-02-2-965x1024.png" alt="Child Impact International logo" loading="lazy" />
 						<div class="project-body">
 							<h2>Child Impact International</h2>
 							<p>
-								Child Impact International protects vulnerable children through education, prevention,
-								and long-term care that addresses root causes of exploitation.
+								Child Impact International is committed to protecting vulnerable children through education, prevention, and long-term care initiatives that address the root causes of exploitation. Guided by our mission to empower vulnerable children through education and fight to eradicate exploitation, our programs focus on equipping children, families, and communities with the knowledge and tools necessary to prevent abuse before it occurs. Project funds will go toward a new ministry for providing workshops, along with materials and teaching resources, to educate vulnerable children in public schools and communities about child protection. These workshops provide age-appropriate instruction that helps children understand safe and unsafe touch, recognize inappropriate behavior, establish personal boundaries, and identify trusted adults and reporting pathways. Through our Sexual Abuse Prevention Outreach, we are expanding educational workshops to reach all 106 public schools in the municipality of Barreirinha, Brazil over an 18-month period.
 							</p>
-							<p>
-								Project funds will support child-protection workshops, materials, and teaching
-								resources for public schools and communities across Barreirinha, Brazil, including
-								age-appropriate abuse prevention education over an 18-month period.
-							</p>
+							<div class="project-extra-images">
+								<img src="https://childimpact.org/wp-content/uploads/2025/06/DSC03599-1024x684.jpg" alt="Child Impact International outreach in Brazil" loading="lazy" />
+							</div>
 						</div>
 					</article>
 				</section>
