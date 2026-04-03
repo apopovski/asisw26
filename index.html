@@ -1866,8 +1866,9 @@
 
 			const EDIT_PASSWORD_HASH = "71a6b8109ca286da3faa86a1ea3a41019e268058d5e0b602524b87483099dc0c";
 			const EDIT_STORAGE_KEY = "asisw-edit-content-v2";
+			const PUBLISHED_STORAGE_KEY = "asisw-published-content-v2";
 			const GLOBAL_CONTENT_URL = "./site-content.json";
-			const PUBLISH_ENDPOINT = ""; // optional: set your secure endpoint URL for global publish
+			const PUBLISH_ENDPOINT = "/api/publish";
 			const AUTOSAVE_DELAY_MS = 900;
 			let isEditMode = false;
 			let sessionEditPassword = "";
@@ -2077,6 +2078,12 @@
 			const saveEdits = () => {
 				const payload = buildPayload();
 				localStorage.setItem(EDIT_STORAGE_KEY, JSON.stringify(payload));
+				return payload;
+			};
+
+			const savePublishedSnapshot = (payload) => {
+				if (!payload) return;
+				localStorage.setItem(PUBLISHED_STORAGE_KEY, JSON.stringify(payload));
 			};
 
 			const queueAutosave = () => {
@@ -2086,11 +2093,25 @@
 				}
 				autosaveTimer = setTimeout(() => {
 					saveEdits();
-					statusEl.textContent = "Autosaved";
+					statusEl.textContent = "Autosaved locally";
 					setTimeout(() => {
 						statusEl.textContent = isEditMode ? "Edit mode on" : "View mode";
 					}, 900);
 				}, AUTOSAVE_DELAY_MS);
+			};
+
+			const flushAutosaveNow = (statusMessage = "Saved locally") => {
+				if (!isEditMode) return null;
+				if (autosaveTimer) {
+					clearTimeout(autosaveTimer);
+					autosaveTimer = null;
+				}
+				const payload = saveEdits();
+				statusEl.textContent = statusMessage;
+				setTimeout(() => {
+					statusEl.textContent = isEditMode ? "Edit mode on" : "View mode";
+				}, 900);
+				return payload;
 			};
 
 			const setEditMode = (enabled) => {
@@ -2137,7 +2158,7 @@
 			};
 
 			const unlockBtn = makeBtn("Unlock Edit");
-			const saveBtn = makeBtn("Save");
+			const saveBtn = makeBtn("Save Local");
 			const publishBtn = makeBtn("Publish");
 			const resetBtn = makeBtn("Reset");
 			const statusEl = document.createElement("span");
@@ -2188,6 +2209,7 @@
 
 			unlockBtn.addEventListener("click", async () => {
 				if (isEditMode) {
+					flushAutosaveNow();
 					setEditMode(false);
 					return;
 				}
@@ -2202,12 +2224,10 @@
 				}
 			});
 
-			saveBtn.addEventListener("click", () => {
-				saveEdits();
-				statusEl.textContent = "Saved";
-				setTimeout(() => {
-					statusEl.textContent = isEditMode ? "Edit mode on" : "View mode";
-				}, 1200);
+			saveBtn.addEventListener("click", (e) => {
+				e.preventDefault();
+				e.stopPropagation();
+				flushAutosaveNow();
 			});
 
 			publishBtn.addEventListener("click", async () => {
@@ -2215,7 +2235,8 @@
 					window.alert("Unlock Edit first.");
 					return;
 				}
-				const payload = buildPayload();
+				const payload = flushAutosaveNow() || saveEdits();
+				savePublishedSnapshot(payload);
 
 				if (PUBLISH_ENDPOINT) {
 					try {
@@ -2234,14 +2255,8 @@
 						statusEl.textContent = "Publish failed";
 					}
 				} else {
-					const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
-					const url = URL.createObjectURL(blob);
-					const a = document.createElement("a");
-					a.href = url;
-					a.download = "site-content.json";
-					a.click();
-					URL.revokeObjectURL(url);
-					statusEl.textContent = "Downloaded site-content.json";
+					statusEl.textContent = "Publish endpoint not configured";
+					window.alert("Publish endpoint is not configured. Deploy with /api/publish enabled.");
 				}
 				setTimeout(() => {
 					statusEl.textContent = isEditMode ? "Edit mode on" : "View mode";
@@ -2271,6 +2286,16 @@
 				const editableHost = target.closest("[contenteditable='true']");
 				if (!editableHost) return;
 				queueAutosave();
+			});
+
+			document.addEventListener("visibilitychange", () => {
+				if (document.visibilityState === "hidden") {
+					flushAutosaveNow();
+				}
+			});
+
+			window.addEventListener("beforeunload", () => {
+				flushAutosaveNow();
 			});
 
 			prepareEditableTopTextNodes();
