@@ -30,6 +30,22 @@ const validatePayload = (payload) => {
 	return hasNodes || hasEventLists;
 };
 
+const getPayloadFromRequest = (req) => {
+	const raw = req.body;
+	if (!raw) return null;
+	if (typeof raw === "string") {
+		try {
+			return JSON.parse(raw);
+		} catch {
+			return null;
+		}
+	}
+	if (typeof raw === "object") {
+		return raw;
+	}
+	return null;
+};
+
 module.exports = async (req, res) => {
 	if (req.method === "OPTIONS") {
 		res.setHeader("Allow", "POST,OPTIONS");
@@ -54,9 +70,12 @@ module.exports = async (req, res) => {
 		return send(res, 401, { error: "Unauthorized" });
 	}
 
-	const payload = req.body;
+	const payload = getPayloadFromRequest(req);
 	if (!validatePayload(payload)) {
-		return send(res, 400, { error: "Invalid payload" });
+		return send(res, 400, {
+			error: "Invalid payload",
+			hint: "Expected JSON object with nodes and/or eventLists",
+		});
 	}
 
 	const owner = process.env.GITHUB_OWNER;

@@ -2086,6 +2086,22 @@
 				localStorage.setItem(PUBLISHED_STORAGE_KEY, JSON.stringify(payload));
 			};
 
+			const getPublishErrorMessage = async (response) => {
+				try {
+					const data = await response.json();
+					if (data?.error === "Server is not configured" && Array.isArray(data?.missing)) {
+						return `Server not configured: missing ${data.missing.join(", ")}`;
+					}
+					if (data?.error === "Unauthorized") {
+						return "Publish unauthorized: edit password does not match server";
+					}
+					if (typeof data?.error === "string") return data.error;
+				} catch {
+					// non-JSON response
+				}
+				return `Publish failed (${response.status})`;
+			};
+
 			const queueAutosave = () => {
 				if (!isEditMode) return;
 				if (autosaveTimer) {
@@ -2249,10 +2265,13 @@
 							headers,
 							body: JSON.stringify(payload),
 						});
-						if (!res.ok) throw new Error("Publish failed");
+						if (!res.ok) {
+							statusEl.textContent = await getPublishErrorMessage(res);
+							return;
+						}
 						statusEl.textContent = "Published globally";
-					} catch {
-						statusEl.textContent = "Publish failed";
+					} catch (err) {
+						statusEl.textContent = `Publish failed: ${err instanceof Error ? err.message : "network error"}`;
 					}
 				} else {
 					statusEl.textContent = "Publish endpoint not configured";
