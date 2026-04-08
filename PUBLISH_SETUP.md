@@ -2,6 +2,11 @@
 
 This project supports global publishing via `/api/publish`.
 
+## Source of truth
+
+- Edit and deploy files from the project root (`index.html`, `projects.html`, `site-content.json`).
+- The old `dist/` copy is not required for this setup.
+
 ## 1) Local env file (for local testing)
 
 Copy `.env.example` to `.env` and fill values:
