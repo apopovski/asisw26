@@ -2061,6 +2061,9 @@
 				} catch {
 					return;
 				}
+				if (!shouldApplyLocalDraft(saved)) {
+					return;
+				}
 				applyPayload(saved);
 			};
 
@@ -2086,6 +2089,25 @@
 				localStorage.setItem(PUBLISHED_STORAGE_KEY, JSON.stringify(payload));
 			};
 
+			const stringifyPayload = (payload) => {
+				try {
+					return JSON.stringify(payload || {});
+				} catch {
+					return "";
+				}
+			};
+
+			const shouldApplyLocalDraft = (localPayload) => {
+				const publishedRaw = localStorage.getItem(PUBLISHED_STORAGE_KEY);
+				if (!publishedRaw) return true;
+				try {
+					const publishedPayload = JSON.parse(publishedRaw);
+					return stringifyPayload(localPayload) !== stringifyPayload(publishedPayload);
+				} catch {
+					return true;
+				}
+			};
+
 			const getPublishErrorMessage = async (response) => {
 				try {
 					const data = await response.json();
@@ -2102,6 +2124,32 @@
 				return `Publish failed (${response.status})`;
 			};
 
+			const publishPayload = async (payload) => {
+				if (!PUBLISH_ENDPOINT) {
+					return { ok: false, message: "Publish endpoint not configured" };
+				}
+				try {
+					const headers = { "Content-Type": "application/json" };
+					if (sessionEditPassword) {
+						headers["X-Edit-Password"] = sessionEditPassword;
+					}
+					const res = await fetch(PUBLISH_ENDPOINT, {
+						method: "POST",
+						headers,
+						body: JSON.stringify(payload),
+					});
+					if (!res.ok) {
+						return { ok: false, message: await getPublishErrorMessage(res) };
+					}
+					return { ok: true, message: "Changes published for everyone" };
+				} catch (err) {
+					return {
+						ok: false,
+						message: `Publish failed: ${err instanceof Error ? err.message : "network error"}`,
+					};
+				}
+			};
+
 			const queueAutosave = () => {
 				if (!isEditMode) return;
 				if (autosaveTimer) {
@@ -2109,14 +2157,14 @@
 				}
 				autosaveTimer = setTimeout(() => {
 					saveEdits();
-					statusEl.textContent = "Autosaved locally";
+					statusEl.textContent = "Autosaved draft locally";
 					setTimeout(() => {
 						statusEl.textContent = isEditMode ? "Edit mode on" : "View mode";
 					}, 900);
 				}, AUTOSAVE_DELAY_MS);
 			};
 
-			const flushAutosaveNow = (statusMessage = "Saved locally") => {
+			const flushAutosaveNow = (statusMessage = "Saved draft locally") => {
 				if (!isEditMode) return null;
 				if (autosaveTimer) {
 					clearTimeout(autosaveTimer);
@@ -2145,7 +2193,7 @@
 					node.style.cursor = enabled ? "text" : "inherit";
 				});
 				refreshLineControls();
-				unlockBtn.textContent = enabled ? "Lock" : "Unlock Edit";
+				unlockBtn.textContent = enabled ? "Done Editing" : "Edit Schedule";
 				statusEl.textContent = enabled ? "Edit mode on" : "View mode";
 			};
 
@@ -2173,14 +2221,65 @@
 				return btn;
 			};
 
-			const unlockBtn = makeBtn("Unlock Edit");
-			const saveBtn = makeBtn("Save Local");
-			const publishBtn = makeBtn("Publish");
+			const unlockBtn = makeBtn("Edit Schedule");
+			const saveBtn = makeBtn("Publish Changes");
+			const publishBtn = makeBtn("Publish Now");
 			const resetBtn = makeBtn("Reset");
+			const healthEl = document.createElement("span");
+			healthEl.textContent = "Publish: checking…";
+			healthEl.style.fontSize = "11px";
+			healthEl.style.padding = "3px 8px";
+			healthEl.style.borderRadius = "999px";
+			healthEl.style.border = "1px solid rgba(148,163,184,0.45)";
+			healthEl.style.background = "rgba(148,163,184,0.2)";
+			healthEl.style.color = "#e5e7eb";
 			const statusEl = document.createElement("span");
 			statusEl.textContent = "View mode";
 			statusEl.style.fontSize = "12px";
 			statusEl.style.opacity = "0.9";
+
+			const setHealthState = (label, background, border, color = "#fff") => {
+				healthEl.textContent = label;
+				healthEl.style.background = background;
+				healthEl.style.borderColor = border;
+				healthEl.style.color = color;
+			};
+
+			const checkPublishHealth = async () => {
+				if (!PUBLISH_ENDPOINT) {
+					setHealthState("Publish: disabled", "rgba(107,114,128,0.25)", "rgba(156,163,175,0.45)", "#d1d5db");
+					return;
+				}
+				setHealthState("Publish: checking…", "rgba(148,163,184,0.2)", "rgba(148,163,184,0.45)", "#e5e7eb");
+				try {
+					const res = await fetch(PUBLISH_ENDPOINT, {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: "{}",
+					});
+					let data = null;
+					try {
+						data = await res.json();
+					} catch {
+						// non-JSON response
+					}
+					if (data?.error === "Server is not configured") {
+						setHealthState("Publish: server misconfigured", "rgba(245,158,11,0.18)", "rgba(245,158,11,0.45)", "#fcd34d");
+						return;
+					}
+					if (res.status === 401 || res.status === 400 || res.status === 200 || res.status === 502) {
+						setHealthState("Publish: online", "rgba(16,185,129,0.2)", "rgba(16,185,129,0.45)", "#a7f3d0");
+						return;
+					}
+					if (res.status === 404 || res.status === 405) {
+						setHealthState("Publish: unavailable", "rgba(239,68,68,0.18)", "rgba(239,68,68,0.45)", "#fecaca");
+						return;
+					}
+					setHealthState(`Publish: status ${res.status}`, "rgba(107,114,128,0.25)", "rgba(156,163,175,0.45)", "#d1d5db");
+				} catch {
+					setHealthState("Publish: network error", "rgba(239,68,68,0.18)", "rgba(239,68,68,0.45)", "#fecaca");
+				}
+			};
 
 			const panel = document.createElement("div");
 			panel.style.display = "none";
@@ -2210,6 +2309,9 @@
 				panelOpen = open;
 				panel.style.display = open ? "flex" : "none";
 				launcherBtn.textContent = open ? "×" : "✎";
+				if (open) {
+					checkPublishHealth();
+				}
 			};
 
 			launcherBtn.addEventListener("click", (e) => {
@@ -2229,54 +2331,43 @@
 					setEditMode(false);
 					return;
 				}
-				const entered = window.prompt("Enter edit password");
+				const entered = window.prompt("Enter editor password");
 				if (!entered) return;
-				const enteredHash = await sha256(entered);
-				if (enteredHash === EDIT_PASSWORD_HASH) {
-					sessionEditPassword = entered;
-					setEditMode(true);
-				} else {
-					window.alert("Incorrect password");
-				}
+				sessionEditPassword = entered;
+				setEditMode(true);
 			});
 
-			saveBtn.addEventListener("click", (e) => {
+			saveBtn.addEventListener("click", async (e) => {
 				e.preventDefault();
 				e.stopPropagation();
-				flushAutosaveNow();
+				if (!isEditMode) {
+					window.alert("Click 'Edit Schedule' first.");
+					return;
+				}
+				const payload = flushAutosaveNow() || saveEdits();
+				const result = await publishPayload(payload);
+				if (result.ok) {
+					savePublishedSnapshot(payload);
+				}
+				statusEl.textContent = result.message;
+				setTimeout(() => {
+					statusEl.textContent = isEditMode ? "Edit mode on" : "View mode";
+				}, 1500);
 			});
 
 			publishBtn.addEventListener("click", async () => {
 				if (!isEditMode) {
-					window.alert("Unlock Edit first.");
+					window.alert("Click 'Edit Schedule' first.");
 					return;
 				}
 				const payload = flushAutosaveNow() || saveEdits();
-				savePublishedSnapshot(payload);
-
-				if (PUBLISH_ENDPOINT) {
-					try {
-						const headers = { "Content-Type": "application/json" };
-						if (sessionEditPassword) {
-							headers["X-Edit-Password"] = sessionEditPassword;
-						}
-						const res = await fetch(PUBLISH_ENDPOINT, {
-							method: "POST",
-							headers,
-							body: JSON.stringify(payload),
-						});
-						if (!res.ok) {
-							statusEl.textContent = await getPublishErrorMessage(res);
-							return;
-						}
-						statusEl.textContent = "Published globally";
-					} catch (err) {
-						statusEl.textContent = `Publish failed: ${err instanceof Error ? err.message : "network error"}`;
-					}
-				} else {
-					statusEl.textContent = "Publish endpoint not configured";
+				const result = await publishPayload(payload);
+				if (result.ok) {
+					savePublishedSnapshot(payload);
+				} else if (result.message === "Publish endpoint not configured") {
 					window.alert("Publish endpoint is not configured. Deploy with /api/publish enabled.");
 				}
+				statusEl.textContent = result.message;
 				setTimeout(() => {
 					statusEl.textContent = isEditMode ? "Edit mode on" : "View mode";
 				}, 1500);
@@ -2293,6 +2384,7 @@
 			panel.appendChild(saveBtn);
 			panel.appendChild(publishBtn);
 			panel.appendChild(resetBtn);
+			panel.appendChild(healthEl);
 			panel.appendChild(statusEl);
 			editorDock.appendChild(panel);
 			editorDock.appendChild(launcherBtn);
@@ -2319,6 +2411,7 @@
 
 			prepareEditableTopTextNodes();
 			(async () => {
+				checkPublishHealth();
 				await loadGlobalEdits();
 				applySavedEdits();
 				setEditMode(false);
